@@ -62,7 +62,7 @@ namespace GitAPI
 
         static string GetToken()
         {
-            string filePath = "D:\tokenFile.txt";
+            string filePath = @"D:\tokenFile.txt";
 
             try
             {

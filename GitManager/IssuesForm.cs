@@ -66,9 +66,11 @@ namespace GitManager
             CreateIssue(title: createNewIssueForm.IssueTitle, description: createNewIssueForm.IssueDescription);
         }
 
-        private void CreateIssue(string title, string description)
+        private async void CreateIssue(string title, string description)
         {
-
+            var response = await PostMethods.PostIssue(title: title, description: description);
+            // check if ok
+            LoadData();
         }
 
     }

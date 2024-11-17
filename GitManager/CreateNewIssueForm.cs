@@ -14,6 +14,7 @@ namespace GitManager
     {
         public string IssueTitle;
         public string IssueDescription;
+        private bool _checkedOkay = true;
 
 
         public CreateNewIssueForm()
@@ -29,14 +30,13 @@ namespace GitManager
 
         private void CreateNewIssueForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(this.TitleTextBox.Text) ||
-                string.IsNullOrWhiteSpace(this.DescriptionLabel.Text))
-            {
-                MessageBox.Show("You have to provide title and description!");
-                e.Cancel = true;
-                return;
-            }
-            e.Cancel = false;
         }
+
+        private void CreateButton_Click(object sender, EventArgs e)
+        {
+            
+
+        }
+
     }
 }
