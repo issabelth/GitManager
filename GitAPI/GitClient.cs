@@ -8,15 +8,25 @@ using System.Threading.Tasks;
 namespace GitAPI
 {
 
-    public static class GitClient
+    public class GitClient
     {
+
+        private string GitOwnerName;
+        private string GitRepoName;
+        public string BaseIssuesAddress;
+
+
+        public GitClient(string gitOwnerName, string gitRepoName)
+        {
+            this.GitOwnerName = gitOwnerName;
+            this.GitRepoName = gitRepoName;
+            this.BaseIssuesAddress = $"repos/{gitOwnerName}/{gitRepoName}/issues";
+        }
 
         public static HttpClient Client = new HttpClient()
         {
             BaseAddress = new Uri(@"https://api.github.com/"),
         };
-
-        public static string BaseIssuesAddress = $"repos/{GitData.GitOwnerName}/{GitData.GitRepoName}/issues";
 
         private static HttpRequestMessage GetReadyToRequest(HttpMethod methodType, string apiPath, string json = "")
         {
@@ -34,7 +44,7 @@ namespace GitAPI
             return request;
         }
 
-        public static async Task<string> SendRequest(HttpMethod methodType, string apiPath, string json = "")
+        public async Task<string> SendRequest(HttpMethod methodType, string apiPath, string json = "")
         {
             var request = GitClient.GetReadyToRequest(methodType: methodType, apiPath: apiPath, json: json);
             var response = await GitClient.Client.SendAsync(request);

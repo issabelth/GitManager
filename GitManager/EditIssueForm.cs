@@ -1,4 +1,5 @@
-﻿using GitAPI.Exceptions;
+﻿using GitAPI;
+using GitAPI.Exceptions;
 using GitAPI.Schemas;
 using GitManager.Methods;
 using System;
@@ -9,10 +10,12 @@ namespace GitManager
     public partial class EditIssueForm : Form
     {
         private Issue _issue = null;
+        private GitClient Client;
 
-        public EditIssueForm(Issue existingIssue)
+        public EditIssueForm(Issue existingIssue, GitClient client)
         {
             InitializeComponent();
+            this.Client = client;
 
             if (existingIssue == null)
             {
@@ -55,7 +58,7 @@ namespace GitManager
 
             try
             {
-                IssuesMethods.SaveIssue(this._issue);
+                IssuesMethods.SaveIssue(issue: this._issue, client: this.Client);
             }
             catch (ResponseException ex)
             {

@@ -1,4 +1,5 @@
-﻿using GitAPI.Methods;
+﻿using GitAPI;
+using GitAPI.Methods;
 using GitAPI.Schemas;
 using System;
 using System.Threading.Tasks;
@@ -8,30 +9,32 @@ namespace GitManager.Methods
     internal static class IssuesMethods
     {
 
-        public static async void SaveIssue(Issue issue)
+        public static void SaveIssue(GitClient client, Issue issue)
         {
             if (issue.Number.HasValue)
             {
-                await UpdateIssue(
+                UpdateIssue(
+                    client: client,
                     issueNumber: issue.Number.Value,
                     title: issue.Title,
                     description: issue.Body);
             }
             else
             {
-                await CreateIssue(
+                CreateIssue(
+                    client: client,
                     title: issue.Title,
                     description: issue.Body);
             }
         }
 
-        private static async Task<string> CreateIssue(string title, string description)
+        private static void CreateIssue(GitClient client, string title, string description)
         {
-            return await PostMethods.PostIssue(title: title, description: description);
+            PostMethods.PostIssue(client: client, title: title, description: description);
         }
-        private static async Task<string> UpdateIssue(Int64 issueNumber, string title, string description)
+        private static void UpdateIssue(GitClient client, Int64 issueNumber, string title, string description)
         {
-            return await PatchMethods.PatchIssue(issueNumber: issueNumber, title: title, description: description);
+            PatchMethods.PatchIssue(client: client, issueNumber: issueNumber, title: title, description: description);
         }
 
     }
