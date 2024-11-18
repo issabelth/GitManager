@@ -60,6 +60,7 @@ namespace GitManager
             try
             {
                 await IssuesMethods.SaveIssue(issue: this._issue, client: this.Client);
+                MessageBox.Show($"[{this._issue.Number}] {this._issue.Title} : saved succesfully");
             }
             catch (ResponseException ex)
             {
@@ -83,6 +84,7 @@ namespace GitManager
             try
             {
                 await IssuesMethods.SaveIssue(issue: this._issue, client: this.Client);
+                MessageBox.Show($"[{this._issue.Number}] {this._issue.Title} : closed succesfully");
             }
             catch (ResponseException ex)
             {
@@ -92,7 +94,7 @@ namespace GitManager
             {
                 MessageBox.Show(ex.Message);
             }
-
+            this.Close();
         }
     }
 }
