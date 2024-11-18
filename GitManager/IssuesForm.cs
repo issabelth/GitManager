@@ -57,6 +57,8 @@ namespace GitManager
                 _bindingSource.DataSource = issues;
                 IssuesDataGridView.DataSource = _bindingSource;
                 SetupDataGridView();
+                CreateNewIssueButton.Enabled = true;
+                RefreshButton.Enabled = true;
             }
             catch (ResponseException ex)
             {
@@ -203,7 +205,7 @@ namespace GitManager
         private void EnableLoadDataButton()
         {
             if (this._repoFilled &&
-                            this._ownerFilled)
+                this._ownerFilled)
             {
                 this.LoadDataButton.Enabled = true;
             }

@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.IssuesDataGridView = new System.Windows.Forms.DataGridView();
             this.bindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.createNewIssueButton = new System.Windows.Forms.Button();
+            this.CreateNewIssueButton = new System.Windows.Forms.Button();
             this.BottomPanel = new System.Windows.Forms.Panel();
             this.RefreshButton = new System.Windows.Forms.Button();
             this.MiddlePanel = new System.Windows.Forms.Panel();
@@ -65,21 +65,22 @@
             this.IssuesDataGridView.TabIndex = 0;
             this.IssuesDataGridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.IssuesDataGridView_CellDoubleClick);
             // 
-            // createNewIssueButton
+            // CreateNewIssueButton
             // 
-            this.createNewIssueButton.Dock = System.Windows.Forms.DockStyle.Left;
-            this.createNewIssueButton.Location = new System.Drawing.Point(0, 0);
-            this.createNewIssueButton.Name = "createNewIssueButton";
-            this.createNewIssueButton.Size = new System.Drawing.Size(200, 79);
-            this.createNewIssueButton.TabIndex = 1;
-            this.createNewIssueButton.Text = "Create new issue";
-            this.createNewIssueButton.UseVisualStyleBackColor = true;
-            this.createNewIssueButton.Click += new System.EventHandler(this.createNewIssue_button_Click);
+            this.CreateNewIssueButton.Dock = System.Windows.Forms.DockStyle.Left;
+            this.CreateNewIssueButton.Enabled = false;
+            this.CreateNewIssueButton.Location = new System.Drawing.Point(0, 0);
+            this.CreateNewIssueButton.Name = "CreateNewIssueButton";
+            this.CreateNewIssueButton.Size = new System.Drawing.Size(200, 79);
+            this.CreateNewIssueButton.TabIndex = 1;
+            this.CreateNewIssueButton.Text = "Create new issue";
+            this.CreateNewIssueButton.UseVisualStyleBackColor = true;
+            this.CreateNewIssueButton.Click += new System.EventHandler(this.createNewIssue_button_Click);
             // 
             // BottomPanel
             // 
             this.BottomPanel.Controls.Add(this.RefreshButton);
-            this.BottomPanel.Controls.Add(this.createNewIssueButton);
+            this.BottomPanel.Controls.Add(this.CreateNewIssueButton);
             this.BottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.BottomPanel.Location = new System.Drawing.Point(0, 807);
             this.BottomPanel.Name = "BottomPanel";
@@ -89,6 +90,7 @@
             // RefreshButton
             // 
             this.RefreshButton.Dock = System.Windows.Forms.DockStyle.Left;
+            this.RefreshButton.Enabled = false;
             this.RefreshButton.Location = new System.Drawing.Point(200, 0);
             this.RefreshButton.Name = "RefreshButton";
             this.RefreshButton.Size = new System.Drawing.Size(200, 79);
@@ -231,7 +233,7 @@
 
         private System.Windows.Forms.DataGridView IssuesDataGridView;
         private System.Windows.Forms.BindingSource bindingSource;
-        private System.Windows.Forms.Button createNewIssueButton;
+        private System.Windows.Forms.Button CreateNewIssueButton;
         private System.Windows.Forms.Panel BottomPanel;
         private System.Windows.Forms.Panel MiddlePanel;
         private System.Windows.Forms.Button RefreshButton;
