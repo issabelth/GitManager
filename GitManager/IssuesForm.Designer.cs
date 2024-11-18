@@ -36,7 +36,7 @@
             this.RefreshButton = new System.Windows.Forms.Button();
             this.MiddlePanel = new System.Windows.Forms.Panel();
             this.UpperPanel = new System.Windows.Forms.Panel();
-            this.LoadOptionsButton = new System.Windows.Forms.Button();
+            this.SelectFileButton = new System.Windows.Forms.Button();
             this.OptionsFilePathTextBox = new System.Windows.Forms.TextBox();
             this.OptionsFilePathLabel = new System.Windows.Forms.Label();
             this.LoadDataButton = new System.Windows.Forms.Button();
@@ -108,7 +108,7 @@
             // 
             // UpperPanel
             // 
-            this.UpperPanel.Controls.Add(this.LoadOptionsButton);
+            this.UpperPanel.Controls.Add(this.SelectFileButton);
             this.UpperPanel.Controls.Add(this.OptionsFilePathTextBox);
             this.UpperPanel.Controls.Add(this.OptionsFilePathLabel);
             this.UpperPanel.Controls.Add(this.LoadDataButton);
@@ -123,22 +123,24 @@
             this.UpperPanel.Size = new System.Drawing.Size(1042, 100);
             this.UpperPanel.TabIndex = 4;
             // 
-            // LoadOptionsButton
+            // SelectFileButton
             // 
-            this.LoadOptionsButton.Location = new System.Drawing.Point(721, 39);
-            this.LoadOptionsButton.Name = "LoadOptionsButton";
-            this.LoadOptionsButton.Size = new System.Drawing.Size(97, 23);
-            this.LoadOptionsButton.TabIndex = 8;
-            this.LoadOptionsButton.Text = "Load options";
-            this.LoadOptionsButton.UseVisualStyleBackColor = true;
-            this.LoadOptionsButton.Click += new System.EventHandler(this.LoadOptionsButton_Click);
+            this.SelectFileButton.Location = new System.Drawing.Point(721, 37);
+            this.SelectFileButton.Name = "SelectFileButton";
+            this.SelectFileButton.Size = new System.Drawing.Size(97, 23);
+            this.SelectFileButton.TabIndex = 9;
+            this.SelectFileButton.Text = "Select file";
+            this.SelectFileButton.UseVisualStyleBackColor = true;
+            this.SelectFileButton.Click += new System.EventHandler(this.SelectFileButton_Click);
             // 
             // OptionsFilePathTextBox
             // 
+            this.OptionsFilePathTextBox.Enabled = false;
             this.OptionsFilePathTextBox.Location = new System.Drawing.Point(123, 39);
             this.OptionsFilePathTextBox.Name = "OptionsFilePathTextBox";
             this.OptionsFilePathTextBox.Size = new System.Drawing.Size(566, 20);
             this.OptionsFilePathTextBox.TabIndex = 7;
+            this.OptionsFilePathTextBox.Text = "Select file with Owner, Repo and Token to load your app options";
             // 
             // OptionsFilePathLabel
             // 
@@ -151,6 +153,7 @@
             // 
             // LoadDataButton
             // 
+            this.LoadDataButton.Enabled = false;
             this.LoadDataButton.Location = new System.Drawing.Point(721, 66);
             this.LoadDataButton.Name = "LoadDataButton";
             this.LoadDataButton.Size = new System.Drawing.Size(97, 23);
@@ -165,6 +168,7 @@
             this.RepoTextBox.Name = "RepoTextBox";
             this.RepoTextBox.Size = new System.Drawing.Size(259, 20);
             this.RepoTextBox.TabIndex = 4;
+            this.RepoTextBox.TextChanged += new System.EventHandler(this.RepoTextBox_TextChanged);
             // 
             // OwnerTextBox
             // 
@@ -172,6 +176,7 @@
             this.OwnerTextBox.Name = "OwnerTextBox";
             this.OwnerTextBox.Size = new System.Drawing.Size(205, 20);
             this.OwnerTextBox.TabIndex = 3;
+            this.OwnerTextBox.TextChanged += new System.EventHandler(this.OwnerTextBox_TextChanged);
             // 
             // RepoLabel
             // 
@@ -239,7 +244,7 @@
         private System.Windows.Forms.Button LoadDataButton;
         private System.Windows.Forms.TextBox OptionsFilePathTextBox;
         private System.Windows.Forms.Label OptionsFilePathLabel;
-        private System.Windows.Forms.Button LoadOptionsButton;
+        private System.Windows.Forms.Button SelectFileButton;
     }
 }
 

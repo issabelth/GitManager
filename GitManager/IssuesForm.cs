@@ -13,7 +13,9 @@ namespace GitManager
     public partial class IssuesForm : Form
     {
         private BindingSource _bindingSource = new BindingSource();
-        GitClient Client;
+        GitClient _Client;
+        bool _ownerFilled = false;
+        bool _repoFilled = false;
 
         public IssuesForm()
         {
@@ -49,8 +51,8 @@ namespace GitManager
         {
             try
             {
-                this.Client = CreateClient();
-                var responseContent = await GetMethods.GetIssues(this.Client);
+                this._Client = CreateClient();
+                var responseContent = await GetMethods.GetIssues(this._Client);
                 var issues = JsonConvert.DeserializeObject<dynamic>(responseContent);
                 _bindingSource.DataSource = issues;
                 IssuesDataGridView.DataSource = _bindingSource;
@@ -105,7 +107,7 @@ namespace GitManager
             try
             {
                 string issueId = IssuesDataGridView[1, e.RowIndex].Value?.ToString(); // get the number of issue from the row
-                var responseContent = await GetMethods.GetIssue(client: this.Client, issueId: issueId);
+                var responseContent = await GetMethods.GetIssue(client: this._Client, issueId: issueId);
                 var issue = JsonConvert.DeserializeObject<Issue>(responseContent);
                 OpenEditIssueForm(issue: issue);
             }
@@ -123,7 +125,7 @@ namespace GitManager
         {
             try
             {
-                var createNewIssueForm = new EditIssueForm(client: this.Client, existingIssue: issue);
+                var createNewIssueForm = new EditIssueForm(client: this._Client, existingIssue: issue);
                 createNewIssueForm.ShowDialog();
             }
             catch (ResponseException ex)
@@ -156,6 +158,59 @@ namespace GitManager
 
             this.OwnerTextBox.Text = appOpts.Owner;
             this.RepoTextBox.Text = appOpts.Repo;
+        }
+
+        private void SelectFileButton_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Filter = "All files (*.*)|*.*";
+                openFileDialog.Title = "Select an options file";
+
+                if (openFileDialog.ShowDialog() != DialogResult.OK)
+                {
+                    return;
+                }
+
+                string filePath = openFileDialog.FileName;
+                this.OptionsFilePathTextBox.Text = filePath;
+                
+                var appOpts = AppOptions.FromFile(filePath: filePath);
+
+                if (appOpts == null)
+                {
+                    MessageBox.Show("Could not load your options file. Check the file and try again.");
+                    return;
+                }
+
+                this.OwnerTextBox.Text = appOpts.Owner;
+                this.RepoTextBox.Text = appOpts.Repo;
+            }
+        }
+
+        private void RepoTextBox_TextChanged(object sender, EventArgs e)
+        {
+            this._repoFilled = !string.IsNullOrWhiteSpace(this.RepoTextBox.Text);
+            EnableLoadDataButton();
+        }
+
+        private void OwnerTextBox_TextChanged(object sender, EventArgs e)
+        {
+            this._ownerFilled = !string.IsNullOrWhiteSpace(this.OwnerTextBox.Text);
+            EnableLoadDataButton();
+        }
+
+        private void EnableLoadDataButton()
+        {
+            if (this._repoFilled &&
+                            this._ownerFilled)
+            {
+                this.LoadDataButton.Enabled = true;
+            }
+            else
+            {
+                this.LoadDataButton.Enabled = false;
+            }
         }
 
     }
