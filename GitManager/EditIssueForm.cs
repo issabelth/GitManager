@@ -41,7 +41,7 @@ namespace GitManager
             }
         }
 
-        private void SaveButton_Click(object sender, EventArgs e)
+        private async void SaveButton_Click(object sender, EventArgs e)
         {
             if (this.DialogResult != DialogResult.OK)
             {
@@ -58,7 +58,7 @@ namespace GitManager
 
             try
             {
-                IssuesMethods.SaveIssue(issue: this._issue, client: this.Client);
+                await IssuesMethods.SaveIssue(issue: this._issue, client: this.Client);
             }
             catch (ResponseException ex)
             {
