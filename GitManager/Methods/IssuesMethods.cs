@@ -17,7 +17,9 @@ namespace GitManager.Methods
                     client: client,
                     issueNumber: issue.Number.Value,
                     title: issue.Title,
-                    description: issue.Body);
+                    description: issue.Body,
+                    state: issue.State
+                    );
             }
             else
             {
@@ -32,9 +34,9 @@ namespace GitManager.Methods
         {
             return await PostMethods.PostIssue(client: client, title: title, description: description);
         }
-        private static async Task<string> UpdateIssue(GitClient client, Int64 issueNumber, string title, string description)
+        private static async Task<string> UpdateIssue(GitClient client, Int64 issueNumber, string title, string description, string state)
         {
-            return await PatchMethods.PatchIssue(client: client, issueNumber: issueNumber, title: title, description: description);
+            return await PatchMethods.PatchIssue(client: client, issueNumber: issueNumber, title: title, description: description, state: state);
         }
 
     }
