@@ -9,9 +9,9 @@ namespace GitManager.Methods
         {
             return await PostMethods.PostIssue(title: title, description: description);
         }
-        public static async Task<string> UpdateIssue(string title, string description)
+        public static async Task<string> UpdateIssue(int issueId, string title, string description)
         {
-            return await PostMethods.PatchIssue(title: title, description: description);
+            return await PatchMethods.PatchIssue(issueId: issueId, title: title, description: description);
         }
     }
 }
