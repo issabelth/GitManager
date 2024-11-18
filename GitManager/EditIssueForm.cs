@@ -37,40 +37,22 @@ namespace GitManager
             }
         }
 
-        private async void SaveButton_Click(object sender, EventArgs e)
+        private void SaveButton_Click(object sender, EventArgs e)
         {
             if (this.DialogResult != DialogResult.OK)
             {
                 return;
             }
 
-            string response = string.Empty;
-
             if (this._issue == null)
             {
-                response = await IssuesMethods.CreateIssue(
-                    title: this.TitleTextBox.Text,
-                    description: this.DescriptionRichTextBox.Text);
-            }
-            else
-            {
-                response = await IssuesMethods.UpdateIssue(
-                    issueId: this._issue.Number,
-                    title: this.TitleTextBox.Text,
-                    description: this.DescriptionRichTextBox.Text);
+                this._issue = new Issue();
             }
 
-            if (!string.IsNullOrWhiteSpace(response))
-            {
-                MessageBox.Show($"Issue saved successfully!");
-                this.DialogResult = DialogResult.OK;
-                this.Close();
-            }
-            else
-            {
-                MessageBox.Show("Failed to save the issue.");
-                this.DialogResult = DialogResult.Cancel;
-            }
+            this._issue.Title = this.TitleTextBox.Text;
+            this._issue.Body = this.DescriptionRichTextBox.Text;
+
+            IssuesMethods.SaveIssue(this._issue);
         }
 
     }

@@ -56,10 +56,7 @@ namespace GitManager
 
         private void createNewIssue_button_Click(object sender, EventArgs e)
         {
-            var createNewIssueForm = new EditIssueForm(existingIssue: null);
-            var dialogResult = createNewIssueForm.ShowDialog();
-            System.Threading.Thread.Sleep(1000); // wait 1 sec
-            LoadData();
+            OpenEditIssueForm(issue: null);
         }
 
         private void RefreshButton_Click(object sender, EventArgs e)
@@ -79,10 +76,13 @@ namespace GitManager
             var responseContent = await GetMethods.GetIssue(issueId);
             var issue = JsonConvert.DeserializeObject<Issue>(responseContent);
 
-            //MessageBox.Show($"{issue.title}: {issue.body}");
+            OpenEditIssueForm(issue: issue);
+        }
 
+        private void OpenEditIssueForm(Issue issue)
+        {
             var createNewIssueForm = new EditIssueForm(existingIssue: issue);
-            var dialogResult = createNewIssueForm.ShowDialog();
+            createNewIssueForm.ShowDialog();
             System.Threading.Thread.Sleep(1000); // wait 1 sec
             LoadData();
         }

@@ -41,8 +41,6 @@ namespace GitAPI
             }
             else
             {
-                // logger?
-                //Console.WriteLine($"Error {response.StatusCode}: {response.ReasonPhrase}");
                 throw new Exception($"Error {response.StatusCode}: {response.ReasonPhrase}");
             }
         }

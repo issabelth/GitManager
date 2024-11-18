@@ -7,10 +7,10 @@ namespace GitAPI.Schemas
     public class Issue
     {
         [JsonProperty("id")]
-        public Int64 Id { get; set; }
+        public Int64? Id { get; set; }
 
         [JsonProperty("number")]
-        public int Number { get; set; }
+        public int? Number { get; set; }
 
         [JsonProperty("title")]
         public string Title { get; set; }
