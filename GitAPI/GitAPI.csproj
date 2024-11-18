@@ -77,11 +77,14 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="YamlDotNet, Version=16.0.0.0, Culture=neutral, PublicKeyToken=ec19458f3c15af5e, processorArchitecture=MSIL">
+      <HintPath>..\packages\YamlDotNet.16.2.0\lib\net47\YamlDotNet.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppOptions.cs" />
     <Compile Include="Exceptions\ExceptionMethods.cs" />
     <Compile Include="Exceptions\ResponseException.cs" />
-    <Compile Include="GitData.cs" />
     <Compile Include="Methods\PatchMethods.cs" />
     <Compile Include="Methods\PostMethods.cs" />
     <Compile Include="Methods\GetMethods.cs" />

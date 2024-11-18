@@ -36,6 +36,9 @@
             this.RefreshButton = new System.Windows.Forms.Button();
             this.MiddlePanel = new System.Windows.Forms.Panel();
             this.UpperPanel = new System.Windows.Forms.Panel();
+            this.LoadOptionsButton = new System.Windows.Forms.Button();
+            this.OptionsFilePathTextBox = new System.Windows.Forms.TextBox();
+            this.OptionsFilePathLabel = new System.Windows.Forms.Label();
             this.LoadDataButton = new System.Windows.Forms.Button();
             this.RepoTextBox = new System.Windows.Forms.TextBox();
             this.OwnerTextBox = new System.Windows.Forms.TextBox();
@@ -105,6 +108,9 @@
             // 
             // UpperPanel
             // 
+            this.UpperPanel.Controls.Add(this.LoadOptionsButton);
+            this.UpperPanel.Controls.Add(this.OptionsFilePathTextBox);
+            this.UpperPanel.Controls.Add(this.OptionsFilePathLabel);
             this.UpperPanel.Controls.Add(this.LoadDataButton);
             this.UpperPanel.Controls.Add(this.RepoTextBox);
             this.UpperPanel.Controls.Add(this.OwnerTextBox);
@@ -117,11 +123,37 @@
             this.UpperPanel.Size = new System.Drawing.Size(1042, 100);
             this.UpperPanel.TabIndex = 4;
             // 
+            // LoadOptionsButton
+            // 
+            this.LoadOptionsButton.Location = new System.Drawing.Point(721, 39);
+            this.LoadOptionsButton.Name = "LoadOptionsButton";
+            this.LoadOptionsButton.Size = new System.Drawing.Size(97, 23);
+            this.LoadOptionsButton.TabIndex = 8;
+            this.LoadOptionsButton.Text = "Load options";
+            this.LoadOptionsButton.UseVisualStyleBackColor = true;
+            this.LoadOptionsButton.Click += new System.EventHandler(this.LoadOptionsButton_Click);
+            // 
+            // OptionsFilePathTextBox
+            // 
+            this.OptionsFilePathTextBox.Location = new System.Drawing.Point(123, 39);
+            this.OptionsFilePathTextBox.Name = "OptionsFilePathTextBox";
+            this.OptionsFilePathTextBox.Size = new System.Drawing.Size(566, 20);
+            this.OptionsFilePathTextBox.TabIndex = 7;
+            // 
+            // OptionsFilePathLabel
+            // 
+            this.OptionsFilePathLabel.AutoSize = true;
+            this.OptionsFilePathLabel.Location = new System.Drawing.Point(31, 44);
+            this.OptionsFilePathLabel.Name = "OptionsFilePathLabel";
+            this.OptionsFilePathLabel.Size = new System.Drawing.Size(86, 13);
+            this.OptionsFilePathLabel.TabIndex = 6;
+            this.OptionsFilePathLabel.Text = "Options file path:";
+            // 
             // LoadDataButton
             // 
-            this.LoadDataButton.Location = new System.Drawing.Point(718, 39);
+            this.LoadDataButton.Location = new System.Drawing.Point(721, 66);
             this.LoadDataButton.Name = "LoadDataButton";
-            this.LoadDataButton.Size = new System.Drawing.Size(75, 23);
+            this.LoadDataButton.Size = new System.Drawing.Size(97, 23);
             this.LoadDataButton.TabIndex = 5;
             this.LoadDataButton.Text = "Load data";
             this.LoadDataButton.UseVisualStyleBackColor = true;
@@ -129,14 +161,14 @@
             // 
             // RepoTextBox
             // 
-            this.RepoTextBox.Location = new System.Drawing.Point(438, 42);
+            this.RepoTextBox.Location = new System.Drawing.Point(430, 67);
             this.RepoTextBox.Name = "RepoTextBox";
             this.RepoTextBox.Size = new System.Drawing.Size(259, 20);
             this.RepoTextBox.TabIndex = 4;
             // 
             // OwnerTextBox
             // 
-            this.OwnerTextBox.Location = new System.Drawing.Point(131, 43);
+            this.OwnerTextBox.Location = new System.Drawing.Point(123, 68);
             this.OwnerTextBox.Name = "OwnerTextBox";
             this.OwnerTextBox.Size = new System.Drawing.Size(205, 20);
             this.OwnerTextBox.TabIndex = 3;
@@ -144,7 +176,7 @@
             // RepoLabel
             // 
             this.RepoLabel.AutoSize = true;
-            this.RepoLabel.Location = new System.Drawing.Point(343, 46);
+            this.RepoLabel.Location = new System.Drawing.Point(335, 71);
             this.RepoLabel.Name = "RepoLabel";
             this.RepoLabel.Size = new System.Drawing.Size(89, 13);
             this.RepoLabel.TabIndex = 2;
@@ -153,7 +185,7 @@
             // OwnerLabel
             // 
             this.OwnerLabel.AutoSize = true;
-            this.OwnerLabel.Location = new System.Drawing.Point(16, 46);
+            this.OwnerLabel.Location = new System.Drawing.Point(8, 71);
             this.OwnerLabel.Name = "OwnerLabel";
             this.OwnerLabel.Size = new System.Drawing.Size(109, 13);
             this.OwnerLabel.TabIndex = 1;
@@ -178,6 +210,7 @@
             this.Controls.Add(this.MiddlePanel);
             this.Controls.Add(this.BottomPanel);
             this.Name = "IssuesForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.IssuesDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource)).EndInit();
@@ -204,6 +237,9 @@
         private System.Windows.Forms.Label OwnerLabel;
         private System.Windows.Forms.Label TipsLabel;
         private System.Windows.Forms.Button LoadDataButton;
+        private System.Windows.Forms.TextBox OptionsFilePathTextBox;
+        private System.Windows.Forms.Label OptionsFilePathLabel;
+        private System.Windows.Forms.Button LoadOptionsButton;
     }
 }
 

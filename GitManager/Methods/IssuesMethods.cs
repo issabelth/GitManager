@@ -1,5 +1,4 @@
 ﻿using GitAPI;
-using GitAPI.Exceptions;
 using GitAPI.Methods;
 using GitAPI.Schemas;
 using System;

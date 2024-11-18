@@ -3,7 +3,6 @@ using GitAPI.Exceptions;
 using GitAPI.Methods;
 using GitAPI.Schemas;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System;
 using System.ComponentModel;
 using System.Reflection;
@@ -137,6 +136,26 @@ namespace GitManager
             }
             System.Threading.Thread.Sleep(1000); // wait 1 sec
             LoadData();
+        }
+
+        private void LoadOptionsButton_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(this.OptionsFilePathTextBox.Text))
+            {
+                MessageBox.Show("Provide options file path!");
+                return;
+            }
+
+            var appOpts = AppOptions.FromFile(filePath: this.OptionsFilePathTextBox.Text);
+
+            if (appOpts == null)
+            {
+                MessageBox.Show("Could not load your options file. Check the file and try again.");
+                return;
+            }
+
+            this.OwnerTextBox.Text = appOpts.Owner;
+            this.RepoTextBox.Text = appOpts.Repo;
         }
 
     }

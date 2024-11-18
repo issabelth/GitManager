@@ -27,6 +27,7 @@ namespace GitManager
                 this._issue = existingIssue;
                 this.TitleTextBox.Text = existingIssue.Title;
                 this.DescriptionRichTextBox.Text = existingIssue.Body;
+                this.CloseButton.Enabled = true;
             }
         }
 
@@ -70,5 +71,28 @@ namespace GitManager
             }
         }
 
+        private async void CloseButton_Click(object sender, EventArgs e)
+        {
+            if (this._issue == null)
+            {
+                return;
+            }
+
+            this._issue.State = "closed";
+
+            try
+            {
+                await IssuesMethods.SaveIssue(issue: this._issue, client: this.Client);
+            }
+            catch (ResponseException ex)
+            {
+                MessageBox.Show(ExceptionMethods.ManageResponseExceptions(ex));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
     }
 }

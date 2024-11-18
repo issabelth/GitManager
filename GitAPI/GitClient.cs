@@ -1,6 +1,5 @@
 ﻿using GitAPI.Exceptions;
 using System;
-using System.IO;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,15 +10,11 @@ namespace GitAPI
     public class GitClient
     {
 
-        private string GitOwnerName;
-        private string GitRepoName;
         public string BaseIssuesAddress;
 
 
         public GitClient(string gitOwnerName, string gitRepoName)
         {
-            this.GitOwnerName = gitOwnerName;
-            this.GitRepoName = gitRepoName;
             this.BaseIssuesAddress = $"repos/{gitOwnerName}/{gitRepoName}/issues";
         }
 
@@ -60,22 +55,21 @@ namespace GitAPI
         }
 
         static string GetToken()
-        {
-            string filePath = @"D:\tokenFile.txt";
+        { 
+            if (string.IsNullOrWhiteSpace(AppFile.AppFilePath))
+            {
+                throw new Exception("Problem with the options file. Check your file and try again.");
+            }
 
-            try
+            var appOpts = AppOptions.FromFile(AppFile.AppFilePath);
+
+            if (appOpts == null ||
+                string.IsNullOrWhiteSpace(appOpts.Token))
             {
-                return File.ReadAllText(filePath);
+                throw new Exception("Problem with loading token from file. Check your file and try again.");
             }
-            catch (FileNotFoundException)
-            {
-                Console.WriteLine("The specified file was not found.");
-            }
-            catch (IOException ex)
-            {
-                Console.WriteLine($"An error occurred while reading file: {ex.Message}");
-            } 
-            return null;
+
+            return appOpts.Token;
         }
 
     }
