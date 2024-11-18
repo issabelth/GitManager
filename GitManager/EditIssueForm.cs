@@ -1,4 +1,5 @@
-﻿using GitAPI.Schemas;
+﻿using GitAPI.Exceptions;
+using GitAPI.Schemas;
 using GitManager.Methods;
 using System;
 using System.Windows.Forms;
@@ -52,7 +53,18 @@ namespace GitManager
             this._issue.Title = this.TitleTextBox.Text;
             this._issue.Body = this.DescriptionRichTextBox.Text;
 
-            IssuesMethods.SaveIssue(this._issue);
+            try
+            {
+                IssuesMethods.SaveIssue(this._issue);
+            }
+            catch (ResponseException ex)
+            {
+                MessageBox.Show(ExceptionMethods.ManageResponseExceptions(ex));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
     }

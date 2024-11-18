@@ -96,12 +96,21 @@ namespace GitManager
             {
                 return;
             }
-
-            string issueId = IssuesDataGridView[1, e.RowIndex].Value?.ToString(); // get the number of issue from the row
-            var responseContent = await GetMethods.GetIssue(issueId);
-            var issue = JsonConvert.DeserializeObject<Issue>(responseContent);
-
-            OpenEditIssueForm(issue: issue);
+            try
+            {
+                string issueId = IssuesDataGridView[1, e.RowIndex].Value?.ToString(); // get the number of issue from the row
+                var responseContent = await GetMethods.GetIssue(issueId);
+                var issue = JsonConvert.DeserializeObject<Issue>(responseContent);
+                OpenEditIssueForm(issue: issue);
+            }
+            catch (ResponseException ex)
+            {
+                MessageBox.Show(ExceptionMethods.ManageResponseExceptions(ex));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void OpenEditIssueForm(Issue issue)

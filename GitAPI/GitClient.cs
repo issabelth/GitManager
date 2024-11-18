@@ -16,7 +16,7 @@ namespace GitAPI
             BaseAddress = new Uri(@"https://api.github.com/"),
         };
 
-        public static readonly string BaseIssuesAddress = $"repos/{GitData.GitOwnerName}/{GitData.GitRepoName}/issues";
+        public static string BaseIssuesAddress = $"repos/{GitData.GitOwnerName}/{GitData.GitRepoName}/issues";
 
         private static HttpRequestMessage GetReadyToRequest(HttpMethod methodType, string apiPath, string json = "")
         {

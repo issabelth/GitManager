@@ -14,6 +14,10 @@ namespace GitAPI.Exceptions
                     {
                         return "You have no permission to do this action. Check your GitHub settings.";
                     }
+                case HttpStatusCode.NotFound:
+                    {
+                        return "Your provided data could not be found. Correct the data.";
+                    }
                 default:
                     {
                         return ex.StatusCode.ToString();
