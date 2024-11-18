@@ -10,16 +10,13 @@ namespace GitAPI.Methods
 
         public static async Task<string> PatchIssue(Int64 issueNumber, string title, string description)
         {
-            string owner = "issabelth";
-            string repo = "GitManager";
-
             var json = JsonConvert.SerializeObject(new
             {
                 title = title,
                 body = description,
             });
 
-            return await GitClient.SendRequest(methodType: new HttpMethod("PATCH"), apiPath: $"repos/{owner}/{repo}/issues/{issueNumber}", json: json);
+            return await GitClient.SendRequest(methodType: new HttpMethod("PATCH"), apiPath: $"{GitClient.BaseIssuesAddress}/{issueNumber}", json: json);
         }
 
 

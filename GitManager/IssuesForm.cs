@@ -1,4 +1,6 @@
-﻿using GitAPI.Methods;
+﻿using GitAPI;
+using GitAPI.Exceptions;
+using GitAPI.Methods;
 using GitAPI.Schemas;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -16,7 +18,6 @@ namespace GitManager
         public IssuesForm()
         {
             InitializeComponent();
-            LoadData();
         }
 
         /// <summary>
@@ -46,22 +47,46 @@ namespace GitManager
 
         private async void LoadData()
         {
-            var responseContent = await GetMethods.GetIssues();
-
-            var issues = JsonConvert.DeserializeObject<dynamic>(responseContent);
-            _bindingSource.DataSource = issues;
-            IssuesDataGridView.DataSource = _bindingSource;
-            SetupDataGridView();
-        }
-
-        private void createNewIssue_button_Click(object sender, EventArgs e)
-        {
-            OpenEditIssueForm(issue: null);
+            try
+            {
+                var responseContent = await GetMethods.GetIssues();
+                var issues = JsonConvert.DeserializeObject<dynamic>(responseContent);
+                _bindingSource.DataSource = issues;
+                IssuesDataGridView.DataSource = _bindingSource;
+                SetupDataGridView();
+            }
+            catch (ResponseException ex)
+            {
+                MessageBox.Show(ExceptionMethods.ManageResponseExceptions(ex));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void RefreshButton_Click(object sender, EventArgs e)
         {
             LoadData();
+        }
+
+        private void LoadDataButton_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(this.OwnerTextBox.Text) ||
+                string.IsNullOrWhiteSpace(this.RepoTextBox.Text))
+            {
+                MessageBox.Show("Provide Git owner's and repo's names!");
+                return;
+            }
+
+            GitData.GitOwnerName = this.OwnerTextBox.Text;
+            GitData.GitRepoName = this.RepoTextBox.Text;
+            LoadData();
+        }
+
+        private void createNewIssue_button_Click(object sender, EventArgs e)
+        {
+            OpenEditIssueForm(issue: null);
         }
 
         private async void IssuesDataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -85,11 +110,6 @@ namespace GitManager
             createNewIssueForm.ShowDialog();
             System.Threading.Thread.Sleep(1000); // wait 1 sec
             LoadData();
-        }
-
-        private void LoadDataButton_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

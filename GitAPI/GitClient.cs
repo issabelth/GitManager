@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GitAPI.Exceptions;
+using System;
 using System.IO;
 using System.Net.Http;
 using System.Text;
@@ -6,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace GitAPI
 {
+
     public static class GitClient
     {
 
@@ -13,6 +15,8 @@ namespace GitAPI
         {
             BaseAddress = new Uri(@"https://api.github.com/"),
         };
+
+        public static readonly string BaseIssuesAddress = $"repos/{GitData.GitOwnerName}/{GitData.GitRepoName}/issues";
 
         private static HttpRequestMessage GetReadyToRequest(HttpMethod methodType, string apiPath, string json = "")
         {
@@ -41,7 +45,7 @@ namespace GitAPI
             }
             else
             {
-                throw new Exception($"Error {response.StatusCode}: {response.ReasonPhrase}");
+                throw new ResponseException(response.StatusCode);
             }
         }
 

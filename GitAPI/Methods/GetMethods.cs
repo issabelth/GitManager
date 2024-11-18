@@ -9,16 +9,12 @@ namespace GitAPI.Methods
 
         public static async Task<string> GetIssues()
         {
-            string owner = "issabelth";
-            string repo = "GitManager";
-            return await GitClient.SendRequest(methodType: HttpMethod.Get, apiPath: $"repos/{owner}/{repo}/issues");
+            return await GitClient.SendRequest(methodType: HttpMethod.Get, apiPath: $"{GitClient.BaseIssuesAddress}");
         }
 
         public static async Task<string> GetIssue(string issueId)
         {
-            string owner = "issabelth";
-            string repo = "GitManager";
-            return await GitClient.SendRequest(methodType: HttpMethod.Get, apiPath: $"repos/{owner}/{repo}/issues/{issueId}");
+            return await GitClient.SendRequest(methodType: HttpMethod.Get, apiPath: $"{GitClient.BaseIssuesAddress}/{issueId}");
         }
 
 

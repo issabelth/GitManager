@@ -79,6 +79,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\ExceptionMethods.cs" />
+    <Compile Include="Exceptions\ResponseException.cs" />
+    <Compile Include="GitData.cs" />
     <Compile Include="Methods\PatchMethods.cs" />
     <Compile Include="Methods\PostMethods.cs" />
     <Compile Include="Methods\GetMethods.cs" />

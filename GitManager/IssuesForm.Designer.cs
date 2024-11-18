@@ -30,20 +30,20 @@
         {
             this.components = new System.ComponentModel.Container();
             this.IssuesDataGridView = new System.Windows.Forms.DataGridView();
-            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.bindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.createNewIssueButton = new System.Windows.Forms.Button();
             this.BottomPanel = new System.Windows.Forms.Panel();
             this.RefreshButton = new System.Windows.Forms.Button();
             this.MiddlePanel = new System.Windows.Forms.Panel();
             this.UpperPanel = new System.Windows.Forms.Panel();
-            this.TipsLabel = new System.Windows.Forms.Label();
-            this.OwnerLabel = new System.Windows.Forms.Label();
-            this.RepoLabel = new System.Windows.Forms.Label();
-            this.OwnerTextBox = new System.Windows.Forms.TextBox();
-            this.RepoTextBox = new System.Windows.Forms.TextBox();
             this.LoadDataButton = new System.Windows.Forms.Button();
+            this.RepoTextBox = new System.Windows.Forms.TextBox();
+            this.OwnerTextBox = new System.Windows.Forms.TextBox();
+            this.RepoLabel = new System.Windows.Forms.Label();
+            this.OwnerLabel = new System.Windows.Forms.Label();
+            this.TipsLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.IssuesDataGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource)).BeginInit();
             this.BottomPanel.SuspendLayout();
             this.MiddlePanel.SuspendLayout();
             this.UpperPanel.SuspendLayout();
@@ -54,11 +54,11 @@
             this.IssuesDataGridView.AllowUserToAddRows = false;
             this.IssuesDataGridView.AllowUserToDeleteRows = false;
             this.IssuesDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.IssuesDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.IssuesDataGridView.Location = new System.Drawing.Point(0, 0);
+            this.IssuesDataGridView.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.IssuesDataGridView.Location = new System.Drawing.Point(0, 106);
             this.IssuesDataGridView.Name = "IssuesDataGridView";
             this.IssuesDataGridView.ReadOnly = true;
-            this.IssuesDataGridView.Size = new System.Drawing.Size(1042, 807);
+            this.IssuesDataGridView.Size = new System.Drawing.Size(1042, 701);
             this.IssuesDataGridView.TabIndex = 0;
             this.IssuesDataGridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.IssuesDataGridView_CellDoubleClick);
             // 
@@ -117,24 +117,29 @@
             this.UpperPanel.Size = new System.Drawing.Size(1042, 100);
             this.UpperPanel.TabIndex = 4;
             // 
-            // TipsLabel
+            // LoadDataButton
             // 
-            this.TipsLabel.AutoSize = true;
-            this.TipsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.TipsLabel.Location = new System.Drawing.Point(12, 9);
-            this.TipsLabel.Name = "TipsLabel";
-            this.TipsLabel.Size = new System.Drawing.Size(169, 13);
-            this.TipsLabel.TabIndex = 0;
-            this.TipsLabel.Text = "Doubleclick to edit the issue";
+            this.LoadDataButton.Location = new System.Drawing.Point(718, 39);
+            this.LoadDataButton.Name = "LoadDataButton";
+            this.LoadDataButton.Size = new System.Drawing.Size(75, 23);
+            this.LoadDataButton.TabIndex = 5;
+            this.LoadDataButton.Text = "Load data";
+            this.LoadDataButton.UseVisualStyleBackColor = true;
+            this.LoadDataButton.Click += new System.EventHandler(this.LoadDataButton_Click);
             // 
-            // OwnerLabel
+            // RepoTextBox
             // 
-            this.OwnerLabel.AutoSize = true;
-            this.OwnerLabel.Location = new System.Drawing.Point(16, 46);
-            this.OwnerLabel.Name = "OwnerLabel";
-            this.OwnerLabel.Size = new System.Drawing.Size(109, 13);
-            this.OwnerLabel.TabIndex = 1;
-            this.OwnerLabel.Text = "Github owner\'s name:";
+            this.RepoTextBox.Location = new System.Drawing.Point(438, 42);
+            this.RepoTextBox.Name = "RepoTextBox";
+            this.RepoTextBox.Size = new System.Drawing.Size(259, 20);
+            this.RepoTextBox.TabIndex = 4;
+            // 
+            // OwnerTextBox
+            // 
+            this.OwnerTextBox.Location = new System.Drawing.Point(131, 43);
+            this.OwnerTextBox.Name = "OwnerTextBox";
+            this.OwnerTextBox.Size = new System.Drawing.Size(205, 20);
+            this.OwnerTextBox.TabIndex = 3;
             // 
             // RepoLabel
             // 
@@ -145,29 +150,24 @@
             this.RepoLabel.TabIndex = 2;
             this.RepoLabel.Text = "Repository name:";
             // 
-            // OwnerTextBox
+            // OwnerLabel
             // 
-            this.OwnerTextBox.Location = new System.Drawing.Point(131, 43);
-            this.OwnerTextBox.Name = "OwnerTextBox";
-            this.OwnerTextBox.Size = new System.Drawing.Size(205, 20);
-            this.OwnerTextBox.TabIndex = 3;
+            this.OwnerLabel.AutoSize = true;
+            this.OwnerLabel.Location = new System.Drawing.Point(16, 46);
+            this.OwnerLabel.Name = "OwnerLabel";
+            this.OwnerLabel.Size = new System.Drawing.Size(109, 13);
+            this.OwnerLabel.TabIndex = 1;
+            this.OwnerLabel.Text = "Github owner\'s name:";
             // 
-            // RepoTextBox
+            // TipsLabel
             // 
-            this.RepoTextBox.Location = new System.Drawing.Point(438, 42);
-            this.RepoTextBox.Name = "RepoTextBox";
-            this.RepoTextBox.Size = new System.Drawing.Size(259, 20);
-            this.RepoTextBox.TabIndex = 4;
-            // 
-            // LoadDataButton
-            // 
-            this.LoadDataButton.Location = new System.Drawing.Point(718, 39);
-            this.LoadDataButton.Name = "LoadDataButton";
-            this.LoadDataButton.Size = new System.Drawing.Size(75, 23);
-            this.LoadDataButton.TabIndex = 5;
-            this.LoadDataButton.Text = "Load data";
-            this.LoadDataButton.UseVisualStyleBackColor = true;
-            this.LoadDataButton.Click += new System.EventHandler(this.LoadDataButton_Click);
+            this.TipsLabel.AutoSize = true;
+            this.TipsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.TipsLabel.Location = new System.Drawing.Point(12, 9);
+            this.TipsLabel.Name = "TipsLabel";
+            this.TipsLabel.Size = new System.Drawing.Size(169, 13);
+            this.TipsLabel.TabIndex = 0;
+            this.TipsLabel.Text = "Doubleclick to edit the issue";
             // 
             // IssuesForm
             // 
@@ -180,7 +180,7 @@
             this.Name = "IssuesForm";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.IssuesDataGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource)).EndInit();
             this.BottomPanel.ResumeLayout(false);
             this.MiddlePanel.ResumeLayout(false);
             this.UpperPanel.ResumeLayout(false);
@@ -192,7 +192,7 @@
         #endregion
 
         private System.Windows.Forms.DataGridView IssuesDataGridView;
-        private System.Windows.Forms.BindingSource bindingSource1;
+        private System.Windows.Forms.BindingSource bindingSource;
         private System.Windows.Forms.Button createNewIssueButton;
         private System.Windows.Forms.Panel BottomPanel;
         private System.Windows.Forms.Panel MiddlePanel;
