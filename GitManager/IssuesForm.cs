@@ -13,7 +13,6 @@ namespace GitManager
     public partial class IssuesForm : Form
     {
         private BindingSource _bindingSource = new BindingSource();
-        GitClient _Client;
         bool _ownerFilled = false;
         bool _repoFilled = false;
 
@@ -51,8 +50,11 @@ namespace GitManager
         {
             try
             {
-                this._Client = CreateClient();
-                var responseContent = await GetMethods.GetIssues(this._Client);
+                AppClient.CreateClient(
+                    ownerName: this.OwnerTextBox.Text,
+                    repoName: this.RepoTextBox.Text);
+
+                var responseContent = await GetMethods.GetIssues(AppClient.Client);
                 var issues = JsonConvert.DeserializeObject<dynamic>(responseContent);
                 _bindingSource.DataSource = issues;
                 IssuesDataGridView.DataSource = _bindingSource;
@@ -68,13 +70,6 @@ namespace GitManager
             {
                 MessageBox.Show(ex.Message);
             }
-        }
-
-        private GitClient CreateClient()
-        {
-            return new GitClient(
-                gitOwnerName: this.OwnerTextBox.Text,
-                gitRepoName: this.RepoTextBox.Text);
         }
 
         private void RefreshButton_Click(object sender, EventArgs e)
@@ -109,7 +104,7 @@ namespace GitManager
             try
             {
                 string issueId = IssuesDataGridView[1, e.RowIndex].Value?.ToString(); // get the number of issue from the row
-                var responseContent = await GetMethods.GetIssue(client: this._Client, issueId: issueId);
+                var responseContent = await GetMethods.GetIssue(client: AppClient.Client, issueId: issueId);
                 var issue = JsonConvert.DeserializeObject<Issue>(responseContent);
                 OpenEditIssueForm(issue: issue);
             }
@@ -127,7 +122,7 @@ namespace GitManager
         {
             try
             {
-                var createNewIssueForm = new EditIssueForm(client: this._Client, existingIssue: issue);
+                var createNewIssueForm = new EditIssueForm(client: AppClient.Client, existingIssue: issue);
                 createNewIssueForm.ShowDialog();
             }
             catch (ResponseException ex)
