@@ -1,6 +1,6 @@
 ﻿namespace GitManager
 {
-    partial class CreateNewIssueForm
+    partial class EditIssueForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,24 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.CreateButton = new System.Windows.Forms.Button();
+            this.SaveButton = new System.Windows.Forms.Button();
             this.TitleLabel = new System.Windows.Forms.Label();
             this.DescriptionLabel = new System.Windows.Forms.Label();
             this.TitleTextBox = new System.Windows.Forms.TextBox();
             this.DescriptionRichTextBox = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
-            // CreateButton
+            // SaveButton
             // 
-            this.CreateButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.CreateButton.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.CreateButton.Location = new System.Drawing.Point(0, 427);
-            this.CreateButton.Name = "CreateButton";
-            this.CreateButton.Size = new System.Drawing.Size(584, 23);
-            this.CreateButton.TabIndex = 0;
-            this.CreateButton.Text = "Create";
-            this.CreateButton.UseVisualStyleBackColor = true;
-            this.CreateButton.Click += new System.EventHandler(this.CreateButton_Click);
+            this.SaveButton.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.SaveButton.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.SaveButton.Location = new System.Drawing.Point(0, 427);
+            this.SaveButton.Name = "SaveButton";
+            this.SaveButton.Size = new System.Drawing.Size(584, 23);
+            this.SaveButton.TabIndex = 0;
+            this.SaveButton.Text = "Save";
+            this.SaveButton.UseVisualStyleBackColor = true;
+            this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
             // TitleLabel
             // 
@@ -80,7 +80,7 @@
             this.DescriptionRichTextBox.TabIndex = 4;
             this.DescriptionRichTextBox.Text = "";
             // 
-            // CreateNewIssueForm
+            // EditIssueForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -89,10 +89,10 @@
             this.Controls.Add(this.TitleTextBox);
             this.Controls.Add(this.DescriptionLabel);
             this.Controls.Add(this.TitleLabel);
-            this.Controls.Add(this.CreateButton);
-            this.Name = "CreateNewIssueForm";
-            this.Text = "CreateNewIssue";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CreateNewIssueForm_FormClosing);
+            this.Controls.Add(this.SaveButton);
+            this.Name = "EditIssueForm";
+            this.Text = "Edit an issue";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EditIssueForm_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -100,7 +100,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button CreateButton;
+        private System.Windows.Forms.Button SaveButton;
         private System.Windows.Forms.Label TitleLabel;
         private System.Windows.Forms.Label DescriptionLabel;
         private System.Windows.Forms.TextBox TitleTextBox;

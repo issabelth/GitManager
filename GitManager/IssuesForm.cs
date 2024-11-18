@@ -53,9 +53,9 @@ namespace GitManager
             SetupDataGridView();
         }
 
-        private void createNewIssue_button_Click(object sender, System.EventArgs e)
+        private void createNewIssue_button_Click(object sender, EventArgs e)
         {
-            var createNewIssueForm = new CreateNewIssueForm();
+            var createNewIssueForm = new EditIssueForm(createNew: true);
             var dialogResult = createNewIssueForm.ShowDialog();
             System.Threading.Thread.Sleep(1000); // wait 1 sec
             LoadData();
@@ -64,6 +64,11 @@ namespace GitManager
         private void RefreshButton_Click(object sender, EventArgs e)
         {
             LoadData();
+        }
+
+        private void IssuesDataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

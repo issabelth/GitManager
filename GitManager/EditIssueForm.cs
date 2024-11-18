@@ -4,15 +4,21 @@ using System.Windows.Forms;
 
 namespace GitManager
 {
-    public partial class CreateNewIssueForm : Form
+    public partial class EditIssueForm : Form
     {
 
-        public CreateNewIssueForm()
+        public EditIssueForm(bool createNew)
         {
             InitializeComponent();
+
+            if (createNew)
+            {
+                this.Text = "Create a new issue";
+                this.SaveButton.Text = "Create";
+            }
         }
 
-        private void CreateNewIssueForm_FormClosing(object sender, FormClosingEventArgs e)
+        private void EditIssueForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (this.DialogResult == DialogResult.OK &&
                 string.IsNullOrWhiteSpace(this.TitleTextBox.Text))
@@ -23,7 +29,7 @@ namespace GitManager
             }
         }
 
-        private async void CreateButton_Click(object sender, EventArgs e)
+        private async void SaveButton_Click(object sender, EventArgs e)
         {
             if (this.DialogResult != DialogResult.OK)
             {
