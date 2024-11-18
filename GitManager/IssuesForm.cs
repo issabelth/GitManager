@@ -87,5 +87,9 @@ namespace GitManager
             LoadData();
         }
 
+        private void LoadDataButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
