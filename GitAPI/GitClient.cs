@@ -6,29 +6,18 @@ using System.Threading.Tasks;
 
 namespace GitAPI
 {
-    public class GitClient
+    public static class GitClient
     {
 
-        public HttpClient Client;
-
-        public GitClient()
+        public static HttpClient Client = new HttpClient()
         {
-            this.Client = CreateClient();
-        }
+            BaseAddress = new Uri(@"https://api.github.com/"),
+        };
 
-        private HttpClient CreateClient()
-        {
-            return new HttpClient()
-            {
-                BaseAddress = new Uri(@"https://api.github.com/"),
-            };
-        }
-
-        private HttpRequestMessage GetReadyToRequest(HttpMethod methodType, string apiPath, string json = "")
+        private static HttpRequestMessage GetReadyToRequest(HttpMethod methodType, string apiPath, string json = "")
         {
             var request = new HttpRequestMessage(methodType, apiPath);
             request.Headers.Add("Accept", "application/vnd.github+json");
-            //request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Authorization", $"Bearer {GetToken()}");
             request.Headers.Add("X-GitHub-Api-Version", "2022-11-28");
             request.Headers.Add("User-Agent", "issabelth");
@@ -43,10 +32,8 @@ namespace GitAPI
 
         public static async Task<string> SendRequest(HttpMethod methodType, string apiPath, string json = "")
         {
-            GitClient gitClient = new GitClient();
-
-            var request = gitClient.GetReadyToRequest(methodType: methodType, apiPath: apiPath, json: json);
-            var response = await gitClient.Client.SendAsync(request);
+            var request = GitClient.GetReadyToRequest(methodType: methodType, apiPath: apiPath, json: json);
+            var response = await GitClient.Client.SendAsync(request);
 
             if (response.IsSuccessStatusCode)
             {
@@ -66,7 +53,6 @@ namespace GitAPI
 
             try
             {
-                // Read the contents of the file
                 return File.ReadAllText(filePath);
             }
             catch (FileNotFoundException)

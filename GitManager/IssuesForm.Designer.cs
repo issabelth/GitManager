@@ -29,51 +29,79 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.IssuesDataGridView = new System.Windows.Forms.DataGridView();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.createNewIssueButton = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.BottomPanel = new System.Windows.Forms.Panel();
+            this.ViewPanel = new System.Windows.Forms.Panel();
+            ((System.ComponentModel.ISupportInitialize)(this.IssuesDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
+            this.BottomPanel.SuspendLayout();
+            this.ViewPanel.SuspendLayout();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // IssuesDataGridView
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(39, 12);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(1130, 371);
-            this.dataGridView1.TabIndex = 0;
+            this.IssuesDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.IssuesDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.IssuesDataGridView.Location = new System.Drawing.Point(0, 0);
+            this.IssuesDataGridView.Name = "IssuesDataGridView";
+            this.IssuesDataGridView.Size = new System.Drawing.Size(1042, 807);
+            this.IssuesDataGridView.TabIndex = 0;
             // 
             // createNewIssueButton
             // 
-            this.createNewIssueButton.Location = new System.Drawing.Point(39, 406);
+            this.createNewIssueButton.Dock = System.Windows.Forms.DockStyle.Left;
+            this.createNewIssueButton.Location = new System.Drawing.Point(0, 0);
             this.createNewIssueButton.Name = "createNewIssueButton";
-            this.createNewIssueButton.Size = new System.Drawing.Size(149, 23);
+            this.createNewIssueButton.Size = new System.Drawing.Size(149, 79);
             this.createNewIssueButton.TabIndex = 1;
             this.createNewIssueButton.Text = "Create new issue";
             this.createNewIssueButton.UseVisualStyleBackColor = true;
             this.createNewIssueButton.Click += new System.EventHandler(this.createNewIssue_button_Click);
             // 
+            // BottomPanel
+            // 
+            this.BottomPanel.Controls.Add(this.createNewIssueButton);
+            this.BottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.BottomPanel.Location = new System.Drawing.Point(0, 807);
+            this.BottomPanel.Name = "BottomPanel";
+            this.BottomPanel.Size = new System.Drawing.Size(1042, 79);
+            this.BottomPanel.TabIndex = 2;
+            // 
+            // ViewPanel
+            // 
+            this.ViewPanel.Controls.Add(this.IssuesDataGridView);
+            this.ViewPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ViewPanel.Location = new System.Drawing.Point(0, 0);
+            this.ViewPanel.Name = "ViewPanel";
+            this.ViewPanel.Size = new System.Drawing.Size(1042, 807);
+            this.ViewPanel.TabIndex = 3;
+            // 
             // IssuesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1294, 649);
-            this.Controls.Add(this.createNewIssueButton);
-            this.Controls.Add(this.dataGridView1);
+            this.ClientSize = new System.Drawing.Size(1042, 886);
+            this.Controls.Add(this.ViewPanel);
+            this.Controls.Add(this.BottomPanel);
             this.Name = "IssuesForm";
             this.Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.IssuesDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
+            this.BottomPanel.ResumeLayout(false);
+            this.ViewPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView IssuesDataGridView;
         private System.Windows.Forms.BindingSource bindingSource1;
         private System.Windows.Forms.Button createNewIssueButton;
+        private System.Windows.Forms.Panel BottomPanel;
+        private System.Windows.Forms.Panel ViewPanel;
     }
 }
 

@@ -24,7 +24,7 @@ namespace GitManager
             var issues = JsonConvert.DeserializeObject<dynamic>(responseContent);
             _BindingSource.DataSource = issues;
 
-            dataGridView1.DataSource = _BindingSource;
+            IssuesDataGridView.DataSource = _BindingSource;
             SetupDataGridView();
         }
 
@@ -33,7 +33,7 @@ namespace GitManager
         /// </summary>
         private void SetupDataGridView()
         {
-            dataGridView1.Columns.Clear();
+            IssuesDataGridView.Columns.Clear();
 
             var properties = typeof(Issue).GetProperties();
 
@@ -49,7 +49,7 @@ namespace GitManager
                     ReadOnly = true,
                 };
 
-                dataGridView1.Columns.Add(column);
+                IssuesDataGridView.Columns.Add(column);
             }
         }
 
@@ -57,19 +57,6 @@ namespace GitManager
         {
             var createNewIssueForm = new CreateNewIssueForm();
             var dialogResult = createNewIssueForm.ShowDialog();
-            
-            if (dialogResult != DialogResult.OK)
-            {
-                return;
-            }
-
-            CreateIssue(title: createNewIssueForm.IssueTitle, description: createNewIssueForm.IssueDescription);
-        }
-
-        private async void CreateIssue(string title, string description)
-        {
-            var response = await PostMethods.PostIssue(title: title, description: description);
-            // check if ok
             LoadData();
         }
 

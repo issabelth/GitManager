@@ -93,7 +93,6 @@
             this.Name = "CreateNewIssueForm";
             this.Text = "CreateNewIssue";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CreateNewIssueForm_FormClosing);
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.CreateNewIssueForm_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 
