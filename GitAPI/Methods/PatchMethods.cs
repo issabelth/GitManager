@@ -4,10 +4,10 @@ using System.Threading.Tasks;
 
 namespace GitAPI.Methods
 {
-    public static class PostMethods
+    public static class PatchMethods
     {
 
-        public static async Task<string> PostIssue(string title, string description)
+        public static async Task<string> PatchIssue(int issueId, string title, string description)
         {
             string owner = "issabelth";
             string repo = "GitManager";
@@ -18,8 +18,9 @@ namespace GitAPI.Methods
                 body = description,
             });
 
-            return await GitClient.SendRequest(methodType: HttpMethod.Post, apiPath: $"repos/{owner}/{repo}/issues", json: json);
+            return await GitClient.SendRequest(methodType: HttpMethod.Put, apiPath: $"repos/{owner}/{repo}/issues/{issueId}", json: json);
         }
+
 
     }
 }

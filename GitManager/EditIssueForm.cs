@@ -1,4 +1,5 @@
-﻿using GitManager.Methods;
+﻿using GitAPI.Schemas;
+using GitManager.Methods;
 using System;
 using System.Windows.Forms;
 
@@ -6,12 +7,13 @@ namespace GitManager
 {
     public partial class EditIssueForm : Form
     {
+        private Issue _issue = null;
 
-        public EditIssueForm(bool createNew)
+        public EditIssueForm(Issue existingIssue)
         {
             InitializeComponent();
 
-            if (createNew)
+            if (existingIssue == null)
             {
                 this.Text = "Create a new issue";
                 this.SaveButton.Text = "Create";
@@ -36,18 +38,25 @@ namespace GitManager
                 return;
             }
 
-            var response = await IssuesMethods.CreateIssue(title: this.TitleTextBox.Text, description: this.DescriptionRichTextBox.Text);
-
-            if (!string.IsNullOrWhiteSpace(response))
+            if (this._issue == null)
             {
-                MessageBox.Show("Issue created successfully!");
-                this.DialogResult = DialogResult.OK;
-                this.Close();
+                var response = await IssuesMethods.CreateIssue(title: this.TitleTextBox.Text, description: this.DescriptionRichTextBox.Text);
+
+                if (!string.IsNullOrWhiteSpace(response))
+                {
+                    MessageBox.Show("Issue created successfully!");
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Failed to create the issue.");
+                    this.DialogResult = DialogResult.Cancel;
+                }
             }
             else
             {
-                MessageBox.Show("Failed to create the issue.");
-                this.DialogResult = DialogResult.Cancel;
+                var response = await IssuesMethods.CreateIssue(title: this.TitleTextBox.Text, description: this.DescriptionRichTextBox.Text);
             }
         }
 
