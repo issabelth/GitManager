@@ -1,4 +1,5 @@
 ﻿using GitAPI.Methods;
+using System;
 using System.Threading.Tasks;
 
 namespace GitManager.Methods
@@ -9,7 +10,7 @@ namespace GitManager.Methods
         {
             return await PostMethods.PostIssue(title: title, description: description);
         }
-        public static async Task<string> UpdateIssue(int issueId, string title, string description)
+        public static async Task<string> UpdateIssue(Int64 issueId, string title, string description)
         {
             return await PatchMethods.PatchIssue(issueId: issueId, title: title, description: description);
         }

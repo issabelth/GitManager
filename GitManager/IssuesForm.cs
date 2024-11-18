@@ -77,12 +77,12 @@ namespace GitManager
 
             string issueId = IssuesDataGridView[1, e.RowIndex].Value?.ToString(); // get the number of issue from the row
             var responseContent = await GetMethods.GetIssue(issueId);
-            var issue = JsonConvert.DeserializeObject<dynamic>(responseContent);
+            var issue = JsonConvert.DeserializeObject<Issue>(responseContent);
 
-            MessageBox.Show($"{issue.Title}: {issue.Body}");
+            //MessageBox.Show($"{issue.title}: {issue.body}");
 
-            //var createNewIssueForm = new EditIssueForm(existingIssue: issue);
-            //var dialogResult = createNewIssueForm.ShowDialog();
+            var createNewIssueForm = new EditIssueForm(existingIssue: issue);
+            var dialogResult = createNewIssueForm.ShowDialog();
             System.Threading.Thread.Sleep(1000); // wait 1 sec
             LoadData();
         }

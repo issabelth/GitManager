@@ -18,6 +18,12 @@ namespace GitManager
                 this.Text = "Create a new issue";
                 this.SaveButton.Text = "Create";
             }
+            else
+            {
+                this._issue = existingIssue;
+                this.TitleTextBox.Text = existingIssue.Title;
+                this.DescriptionRichTextBox.Text = existingIssue.Body;
+            }
         }
 
         private void EditIssueForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -38,25 +44,32 @@ namespace GitManager
                 return;
             }
 
+            string response = string.Empty;
+
             if (this._issue == null)
             {
-                var response = await IssuesMethods.CreateIssue(title: this.TitleTextBox.Text, description: this.DescriptionRichTextBox.Text);
-
-                if (!string.IsNullOrWhiteSpace(response))
-                {
-                    MessageBox.Show("Issue created successfully!");
-                    this.DialogResult = DialogResult.OK;
-                    this.Close();
-                }
-                else
-                {
-                    MessageBox.Show("Failed to create the issue.");
-                    this.DialogResult = DialogResult.Cancel;
-                }
+                response = await IssuesMethods.CreateIssue(
+                    title: this.TitleTextBox.Text,
+                    description: this.DescriptionRichTextBox.Text);
             }
             else
             {
-                var response = await IssuesMethods.CreateIssue(title: this.TitleTextBox.Text, description: this.DescriptionRichTextBox.Text);
+                response = await IssuesMethods.UpdateIssue(
+                    issueId: this._issue.Number,
+                    title: this.TitleTextBox.Text,
+                    description: this.DescriptionRichTextBox.Text);
+            }
+
+            if (!string.IsNullOrWhiteSpace(response))
+            {
+                MessageBox.Show($"Issue saved successfully!");
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Failed to save the issue.");
+                this.DialogResult = DialogResult.Cancel;
             }
         }
 

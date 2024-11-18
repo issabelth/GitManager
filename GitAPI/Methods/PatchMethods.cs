@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -7,7 +8,7 @@ namespace GitAPI.Methods
     public static class PatchMethods
     {
 
-        public static async Task<string> PatchIssue(int issueId, string title, string description)
+        public static async Task<string> PatchIssue(Int64 issueId, string title, string description)
         {
             string owner = "issabelth";
             string repo = "GitManager";
@@ -18,7 +19,7 @@ namespace GitAPI.Methods
                 body = description,
             });
 
-            return await GitClient.SendRequest(methodType: HttpMethod.Put, apiPath: $"repos/{owner}/{repo}/issues/{issueId}", json: json);
+            return await GitClient.SendRequest(methodType: new HttpMethod("PATCH"), apiPath: $"repos/{owner}/{repo}/issues/{issueId}", json: json);
         }
 
 

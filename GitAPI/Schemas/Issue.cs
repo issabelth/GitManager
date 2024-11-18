@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.ComponentModel;
 
 namespace GitAPI.Schemas
@@ -6,7 +7,7 @@ namespace GitAPI.Schemas
     public class Issue
     {
         [JsonProperty("id")]
-        public int Id { get; set; }
+        public Int64 Id { get; set; }
 
         [JsonProperty("number")]
         public int Number { get; set; }
