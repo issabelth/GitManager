@@ -45,6 +45,7 @@
             this.RepoLabel = new System.Windows.Forms.Label();
             this.OwnerLabel = new System.Windows.Forms.Label();
             this.TipsLabel = new System.Windows.Forms.Label();
+            this.ExampleRichTextBox = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.IssuesDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource)).BeginInit();
             this.BottomPanel.SuspendLayout();
@@ -57,11 +58,11 @@
             this.IssuesDataGridView.AllowUserToAddRows = false;
             this.IssuesDataGridView.AllowUserToDeleteRows = false;
             this.IssuesDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.IssuesDataGridView.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.IssuesDataGridView.Location = new System.Drawing.Point(0, 106);
+            this.IssuesDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.IssuesDataGridView.Location = new System.Drawing.Point(0, 0);
             this.IssuesDataGridView.Name = "IssuesDataGridView";
             this.IssuesDataGridView.ReadOnly = true;
-            this.IssuesDataGridView.Size = new System.Drawing.Size(1042, 701);
+            this.IssuesDataGridView.Size = new System.Drawing.Size(1042, 698);
             this.IssuesDataGridView.TabIndex = 0;
             this.IssuesDataGridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.IssuesDataGridView_CellDoubleClick);
             // 
@@ -102,14 +103,15 @@
             // MiddlePanel
             // 
             this.MiddlePanel.Controls.Add(this.IssuesDataGridView);
-            this.MiddlePanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.MiddlePanel.Location = new System.Drawing.Point(0, 0);
+            this.MiddlePanel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.MiddlePanel.Location = new System.Drawing.Point(0, 109);
             this.MiddlePanel.Name = "MiddlePanel";
-            this.MiddlePanel.Size = new System.Drawing.Size(1042, 807);
+            this.MiddlePanel.Size = new System.Drawing.Size(1042, 698);
             this.MiddlePanel.TabIndex = 3;
             // 
             // UpperPanel
             // 
+            this.UpperPanel.Controls.Add(this.ExampleRichTextBox);
             this.UpperPanel.Controls.Add(this.SelectFileButton);
             this.UpperPanel.Controls.Add(this.OptionsFilePathTextBox);
             this.UpperPanel.Controls.Add(this.OptionsFilePathLabel);
@@ -122,12 +124,12 @@
             this.UpperPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.UpperPanel.Location = new System.Drawing.Point(0, 0);
             this.UpperPanel.Name = "UpperPanel";
-            this.UpperPanel.Size = new System.Drawing.Size(1042, 100);
+            this.UpperPanel.Size = new System.Drawing.Size(1042, 103);
             this.UpperPanel.TabIndex = 4;
             // 
             // SelectFileButton
             // 
-            this.SelectFileButton.Location = new System.Drawing.Point(721, 37);
+            this.SelectFileButton.Location = new System.Drawing.Point(695, 37);
             this.SelectFileButton.Name = "SelectFileButton";
             this.SelectFileButton.Size = new System.Drawing.Size(97, 23);
             this.SelectFileButton.TabIndex = 9;
@@ -142,7 +144,7 @@
             this.OptionsFilePathTextBox.Name = "OptionsFilePathTextBox";
             this.OptionsFilePathTextBox.Size = new System.Drawing.Size(566, 20);
             this.OptionsFilePathTextBox.TabIndex = 7;
-            this.OptionsFilePathTextBox.Text = "Select file with Owner, Repo and Token to load your app options";
+            this.OptionsFilePathTextBox.Text = "Select .txt file with Owner, Repo and Token to load your app options";
             // 
             // OptionsFilePathLabel
             // 
@@ -156,7 +158,7 @@
             // LoadDataButton
             // 
             this.LoadDataButton.Enabled = false;
-            this.LoadDataButton.Location = new System.Drawing.Point(721, 66);
+            this.LoadDataButton.Location = new System.Drawing.Point(695, 66);
             this.LoadDataButton.Name = "LoadDataButton";
             this.LoadDataButton.Size = new System.Drawing.Size(97, 23);
             this.LoadDataButton.TabIndex = 5;
@@ -208,6 +210,15 @@
             this.TipsLabel.TabIndex = 0;
             this.TipsLabel.Text = "Doubleclick to edit the issue";
             // 
+            // ExampleRichTextBox
+            // 
+            this.ExampleRichTextBox.Enabled = false;
+            this.ExampleRichTextBox.Location = new System.Drawing.Point(798, 13);
+            this.ExampleRichTextBox.Name = "ExampleRichTextBox";
+            this.ExampleRichTextBox.Size = new System.Drawing.Size(232, 71);
+            this.ExampleRichTextBox.TabIndex = 10;
+            this.ExampleRichTextBox.Text = "";
+            // 
             // IssuesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -247,6 +258,7 @@
         private System.Windows.Forms.TextBox OptionsFilePathTextBox;
         private System.Windows.Forms.Label OptionsFilePathLabel;
         private System.Windows.Forms.Button SelectFileButton;
+        private System.Windows.Forms.RichTextBox ExampleRichTextBox;
     }
 }
 

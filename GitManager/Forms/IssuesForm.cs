@@ -19,6 +19,11 @@ namespace GitManager.Forms
         public IssuesForm()
         {
             InitializeComponent();
+            this.ExampleRichTextBox.Text = 
+                $"Prepare a .txt file with this example:{Environment.NewLine}" +
+                $"Token: <your security token>{Environment.NewLine}" +
+                $"Owner: <repository owner's name>{Environment.NewLine}" +
+                $"Repo:  <repository name>{Environment.NewLine}";
         }
 
         /// <summary>
@@ -161,7 +166,7 @@ namespace GitManager.Forms
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
-                openFileDialog.Filter = "All files (*.*)|*.*";
+                openFileDialog.Filter = "Text files (*.txt)|*.txt";
                 openFileDialog.Title = "Select an options file";
 
                 if (openFileDialog.ShowDialog() != DialogResult.OK)
