@@ -33,6 +33,7 @@
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.createNewIssueButton = new System.Windows.Forms.Button();
             this.BottomPanel = new System.Windows.Forms.Panel();
+            this.RefreshButton = new System.Windows.Forms.Button();
             this.ViewPanel = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.IssuesDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
@@ -54,7 +55,7 @@
             this.createNewIssueButton.Dock = System.Windows.Forms.DockStyle.Left;
             this.createNewIssueButton.Location = new System.Drawing.Point(0, 0);
             this.createNewIssueButton.Name = "createNewIssueButton";
-            this.createNewIssueButton.Size = new System.Drawing.Size(149, 79);
+            this.createNewIssueButton.Size = new System.Drawing.Size(200, 79);
             this.createNewIssueButton.TabIndex = 1;
             this.createNewIssueButton.Text = "Create new issue";
             this.createNewIssueButton.UseVisualStyleBackColor = true;
@@ -62,12 +63,24 @@
             // 
             // BottomPanel
             // 
+            this.BottomPanel.Controls.Add(this.RefreshButton);
             this.BottomPanel.Controls.Add(this.createNewIssueButton);
             this.BottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.BottomPanel.Location = new System.Drawing.Point(0, 807);
             this.BottomPanel.Name = "BottomPanel";
             this.BottomPanel.Size = new System.Drawing.Size(1042, 79);
             this.BottomPanel.TabIndex = 2;
+            // 
+            // RefreshButton
+            // 
+            this.RefreshButton.Dock = System.Windows.Forms.DockStyle.Left;
+            this.RefreshButton.Location = new System.Drawing.Point(200, 0);
+            this.RefreshButton.Name = "RefreshButton";
+            this.RefreshButton.Size = new System.Drawing.Size(200, 79);
+            this.RefreshButton.TabIndex = 2;
+            this.RefreshButton.Text = "Refresh data";
+            this.RefreshButton.UseVisualStyleBackColor = true;
+            this.RefreshButton.Click += new System.EventHandler(this.RefreshButton_Click);
             // 
             // ViewPanel
             // 
@@ -102,6 +115,7 @@
         private System.Windows.Forms.Button createNewIssueButton;
         private System.Windows.Forms.Panel BottomPanel;
         private System.Windows.Forms.Panel ViewPanel;
+        private System.Windows.Forms.Button RefreshButton;
     }
 }
 

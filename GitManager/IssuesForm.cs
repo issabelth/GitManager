@@ -1,6 +1,7 @@
 ﻿using GitAPI.Methods;
 using GitAPI.Schemas;
 using Newtonsoft.Json;
+using System;
 using System.ComponentModel;
 using System.Reflection;
 using System.Windows.Forms;
@@ -9,23 +10,12 @@ namespace GitManager
 {
     public partial class IssuesForm : Form
     {
-        private BindingSource _BindingSource = new BindingSource();
+        private BindingSource _bindingSource = new BindingSource();
 
         public IssuesForm()
         {
             InitializeComponent();
             LoadData();
-        }
-
-        private async void LoadData()
-        {
-            var responseContent = await GetMethods.GetIssues();
-
-            var issues = JsonConvert.DeserializeObject<dynamic>(responseContent);
-            _BindingSource.DataSource = issues;
-
-            IssuesDataGridView.DataSource = _BindingSource;
-            SetupDataGridView();
         }
 
         /// <summary>
@@ -53,12 +43,27 @@ namespace GitManager
             }
         }
 
+        private async void LoadData()
+        {
+            var responseContent = await GetMethods.GetIssues();
+
+            var issues = JsonConvert.DeserializeObject<dynamic>(responseContent);
+            _bindingSource.DataSource = issues;
+            IssuesDataGridView.DataSource = _bindingSource;
+            SetupDataGridView();
+        }
+
         private void createNewIssue_button_Click(object sender, System.EventArgs e)
         {
             var createNewIssueForm = new CreateNewIssueForm();
             var dialogResult = createNewIssueForm.ShowDialog();
+            System.Threading.Thread.Sleep(1000); // wait 1 sec
             LoadData();
         }
 
+        private void RefreshButton_Click(object sender, EventArgs e)
+        {
+            LoadData();
+        }
     }
 }

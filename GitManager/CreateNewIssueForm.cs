@@ -1,7 +1,5 @@
-﻿using GitAPI.Methods;
-using GitManager.Methods;
+﻿using GitManager.Methods;
 using System;
-using System.Drawing;
 using System.Windows.Forms;
 
 namespace GitManager
@@ -32,11 +30,19 @@ namespace GitManager
                 return;
             }
 
-            // Await the CreateIssue method to get the result
             var response = await IssuesMethods.CreateIssue(title: this.TitleTextBox.Text, description: this.DescriptionRichTextBox.Text);
 
-            // Optionally handle the response here, e.g., show a message or log it
-            MessageBox.Show(response);
+            if (!string.IsNullOrWhiteSpace(response))
+            {
+                MessageBox.Show("Issue created successfully!");
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Failed to create the issue.");
+                this.DialogResult = DialogResult.Cancel;
+            }
         }
 
     }
