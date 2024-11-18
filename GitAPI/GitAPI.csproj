@@ -82,7 +82,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppOptions.cs" />
+    <Compile Include="ApiOptions.cs" />
     <Compile Include="Exceptions\ExceptionMethods.cs" />
     <Compile Include="Exceptions\ResponseException.cs" />
     <Compile Include="Methods\PatchMethods.cs" />

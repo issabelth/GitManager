@@ -81,25 +81,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppClient.cs" />
-    <Compile Include="EditIssueForm.cs">
+    <Compile Include="Forms\EditIssueForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EditIssueForm.Designer.cs">
+    <Compile Include="Forms\EditIssueForm.Designer.cs">
       <DependentUpon>EditIssueForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="IssuesForm.cs">
+    <Compile Include="Forms\IssuesForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="IssuesForm.Designer.cs">
+    <Compile Include="Forms\IssuesForm.Designer.cs">
       <DependentUpon>IssuesForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Methods\IssuesMethods.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="EditIssueForm.resx">
+    <EmbeddedResource Include="Forms\EditIssueForm.resx">
       <DependentUpon>EditIssueForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="IssuesForm.resx">
+    <EmbeddedResource Include="Forms\IssuesForm.resx">
       <DependentUpon>IssuesForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

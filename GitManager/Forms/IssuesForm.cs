@@ -8,7 +8,7 @@ using System.ComponentModel;
 using System.Reflection;
 using System.Windows.Forms;
 
-namespace GitManager
+namespace GitManager.Forms
 {
     public partial class IssuesForm : Form
     {
@@ -145,7 +145,7 @@ namespace GitManager
                 return;
             }
 
-            var appOpts = AppOptions.FromFile(filePath: this.OptionsFilePathTextBox.Text);
+            var appOpts = ApiOptions.FromFile(filePath: this.OptionsFilePathTextBox.Text);
 
             if (appOpts == null)
             {
@@ -172,7 +172,7 @@ namespace GitManager
                 string filePath = openFileDialog.FileName;
                 this.OptionsFilePathTextBox.Text = filePath;
                 
-                var appOpts = AppOptions.FromFile(filePath: filePath);
+                var appOpts = ApiOptions.FromFile(filePath: filePath);
 
                 if (appOpts == null)
                 {

@@ -8,7 +8,7 @@ namespace GitAPI
         public static string AppFilePath { get; set; }
     }
 
-    public class AppOptions
+    public class ApiOptions
     {
         public string Token
         {
@@ -25,7 +25,7 @@ namespace GitAPI
             get; set;
         }
 
-        public static AppOptions FromFile(string filePath)
+        public static ApiOptions FromFile(string filePath)
         {
             if (!File.Exists(filePath))
             {
@@ -34,11 +34,11 @@ namespace GitAPI
 
             AppFile.AppFilePath = filePath;
             var deserializer = new Deserializer();
-            AppOptions options;
+            ApiOptions options;
 
             using (var reader = File.OpenText(filePath))
             {
-                options = deserializer.Deserialize<AppOptions>(reader);
+                options = deserializer.Deserialize<ApiOptions>(reader);
             }
 
             return options;

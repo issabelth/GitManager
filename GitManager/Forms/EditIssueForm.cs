@@ -5,7 +5,7 @@ using GitManager.Methods;
 using System;
 using System.Windows.Forms;
 
-namespace GitManager
+namespace GitManager.Forms
 {
     public partial class EditIssueForm : Form
     {

@@ -1,4 +1,4 @@
-﻿namespace GitManager
+﻿namespace GitManager.Forms
 {
     partial class IssuesForm
     {
