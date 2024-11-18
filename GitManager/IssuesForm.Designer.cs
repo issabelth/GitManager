@@ -43,11 +43,13 @@
             // 
             // IssuesDataGridView
             // 
-            this.IssuesDataGridView.AllowUserToOrderColumns = true;
+            this.IssuesDataGridView.AllowUserToAddRows = false;
+            this.IssuesDataGridView.AllowUserToDeleteRows = false;
             this.IssuesDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.IssuesDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.IssuesDataGridView.Location = new System.Drawing.Point(0, 0);
             this.IssuesDataGridView.Name = "IssuesDataGridView";
+            this.IssuesDataGridView.ReadOnly = true;
             this.IssuesDataGridView.Size = new System.Drawing.Size(1042, 807);
             this.IssuesDataGridView.TabIndex = 0;
             this.IssuesDataGridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.IssuesDataGridView_CellDoubleClick);

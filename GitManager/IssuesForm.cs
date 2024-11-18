@@ -1,6 +1,7 @@
 ﻿using GitAPI.Methods;
 using GitAPI.Schemas;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.ComponentModel;
 using System.Reflection;
@@ -66,14 +67,25 @@ namespace GitManager
             LoadData();
         }
 
-        private void IssuesDataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private async void IssuesDataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex < 0 ||
+                e.ColumnIndex < 0)
+            {
+                return;
+            }
 
+            string issueId = IssuesDataGridView[1, e.RowIndex].Value?.ToString(); // get the number of issue from the row
+            var responseContent = await GetMethods.GetIssue(issueId);
+            var issue = JsonConvert.DeserializeObject<dynamic>(responseContent);
 
-            var createNewIssueForm = new EditIssueForm(createNew: true);
-            var dialogResult = createNewIssueForm.ShowDialog();
+            MessageBox.Show($"{issue.Title}: {issue.Body}");
+
+            //var createNewIssueForm = new EditIssueForm(existingIssue: issue);
+            //var dialogResult = createNewIssueForm.ShowDialog();
             System.Threading.Thread.Sleep(1000); // wait 1 sec
             LoadData();
         }
+
     }
 }

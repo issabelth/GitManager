@@ -8,6 +8,9 @@ namespace GitAPI.Schemas
         [JsonProperty("id")]
         public int Id { get; set; }
 
+        [JsonProperty("number")]
+        public int Number { get; set; }
+
         [JsonProperty("title")]
         public string Title { get; set; }
 
