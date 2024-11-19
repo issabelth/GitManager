@@ -9,12 +9,25 @@ namespace GitAPI.Methods
 
         public static async Task<string> PutIssue_GitLab(GitClient client, string projectId, int issueNumber, string title, string description, string state)
         {
-            var json = JsonConvert.SerializeObject(new
+            string json = string.Empty;
+
+            if (state.Contains("close"))
             {
-                title = title,
-                description = description,
-                state_event = state,
-            });
+                json = JsonConvert.SerializeObject(new
+                {
+                    title = title,
+                    description = description,
+                    state_event = state,
+                });
+            }
+            else
+            {
+                json = JsonConvert.SerializeObject(new
+                {
+                    title = title,
+                    description = description,
+                });
+            }
 
             return await client.SendRequest(methodType: HttpMethod.Put, apiPath: $"{client.BaseProjectsAddress}/{projectId}/issues/{issueNumber}", json: json);
         }
