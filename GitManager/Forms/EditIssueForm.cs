@@ -33,6 +33,13 @@ namespace GitManager.Forms
             }
         }
 
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+            this.TitleTextBox.Focus();
+            this.ActiveControl = this.TitleTextBox;
+        }
+
         private void EditIssueForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (this.DialogResult == DialogResult.OK &&

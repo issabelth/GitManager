@@ -88,6 +88,7 @@ namespace GitManager.Forms
 
         private async void OpenEditIssueForm(string issueId)
         {
+            // block opening more than one edit form
             if (_editIssueForm != null &&
                 !_editIssueForm.IsDisposed)
             {
