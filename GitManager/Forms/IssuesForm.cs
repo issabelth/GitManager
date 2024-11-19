@@ -49,6 +49,7 @@ namespace GitManager.Forms
 
                 DataGridViewTextBoxColumn column = new DataGridViewTextBoxColumn
                 {
+                    Name = property.Name,
                     HeaderText = columnText,
                     DataPropertyName = property.Name,
                     ReadOnly = true,
@@ -115,7 +116,9 @@ namespace GitManager.Forms
             }
             try
             {
-                string issueId = IssuesDataGridView[1, e.RowIndex].Value?.ToString(); // get the number of issue from the row
+                int columnIndex = IssuesDataGridView.Columns[nameof(BaseIssue.Number)].Index;
+                string issueId = IssuesDataGridView[columnIndex, e.RowIndex].Value?.ToString();
+
                 var responseContent = await GetMethods.GetIssue(client: AppClient.Client, issueId: issueId);
                 var issue = JsonConvert.DeserializeObject<BaseIssue>(responseContent);
                 OpenEditIssueForm(issue: issue);
