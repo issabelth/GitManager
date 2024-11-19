@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GitAPI;
+using System;
 using System.Drawing;
 
 namespace GitManager.Forms
@@ -27,7 +28,7 @@ namespace GitManager.Forms
             this.ExampleRichTextBox.SelectionFont = new Font(this.ExampleRichTextBox.Font, FontStyle.Regular);
             this.ExampleRichTextBox.SelectionStart = this.ExampleRichTextBox.TextLength;
             this.ExampleRichTextBox.SelectionLength = 0;
-            this.ExampleRichTextBox.AppendText("<one of the following: Github/Gitlab/Bitbucket>");
+            this.ExampleRichTextBox.AppendText($"<one of the following: {HostData.GetAllHostsString()} >");
             this.ExampleRichTextBox.AppendText(Environment.NewLine);
 
             // Append the Token text in bold

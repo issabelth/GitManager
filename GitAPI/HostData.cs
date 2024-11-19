@@ -13,7 +13,7 @@ namespace GitAPI
         {
             Github,
             Gitlab,
-            Bitbucket,
+            //Bitbucket,
         }
 
         public static Dictionary<HostNameEnum, string> HostNameDictionary = new Dictionary<HostNameEnum, string>()
@@ -22,6 +22,11 @@ namespace GitAPI
             { HostNameEnum.Gitlab, "gitlab"},
             //{ HostNameEnum.Bitbucket, "bitbucket"},
         };
+
+        public static string GetAllHostsString()
+        {
+            return string.Join(" / ", HostNameDictionary.Keys);
+        }
 
         public static HostNameEnum? GetHostKey(string hostName)
         {
@@ -41,7 +46,6 @@ namespace GitAPI
 
             return hostKey;
         }
-
 
     }
 }
