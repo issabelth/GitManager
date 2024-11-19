@@ -12,6 +12,7 @@ namespace GitAPI
 
         public string BaseClientAddress;
         public string BaseIssuesAddress;
+        public string NewIssueAddress;
         
         public GitClient()
         {

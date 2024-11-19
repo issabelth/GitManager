@@ -18,6 +18,7 @@ namespace GitManager
                         Client = new GitClient();
                         Client.BaseClientAddress = @"https://api.github.com/";
                         Client.BaseIssuesAddress = $"repos/{ownerName}/{repoName}/issues";
+                        Client.NewIssueAddress = $"repos/{ownerName}/{repoName}/issues";
 
                         break;
                     }
@@ -26,6 +27,7 @@ namespace GitManager
                         Client = new GitClient();
                         Client.BaseClientAddress = @"https://gitlab.com/api/v4/";
                         Client.BaseIssuesAddress = $"issues";
+                        Client.NewIssueAddress = $"projects/64632746/issues";
                         break;
                     }
             }

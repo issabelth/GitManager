@@ -9,13 +9,26 @@ namespace GitAPI.Methods
 
         public static async Task<string> PostIssue(GitClient client, string title, string description)
         {
-            var json = JsonConvert.SerializeObject(new
-            {
-                title = title,
-                body = description,
-            });
+            string json = string.Empty;
 
-            return await client.SendRequest(methodType: HttpMethod.Post, apiPath: $"{client.BaseIssuesAddress}", json: json);
+            if (HostData.Host == HostData.HostNameEnum.Github)
+            {
+                json = JsonConvert.SerializeObject(new
+                {
+                    title = title,
+                    body = description,
+                });
+            }
+            else if (HostData.Host == HostData.HostNameEnum.Gitlab)
+            {
+                json = JsonConvert.SerializeObject(new
+                {
+                    title = title,
+                    description = description,
+                });
+            }
+
+            return await client.SendRequest(methodType: HttpMethod.Post, apiPath: $"{client.NewIssueAddress}", json: json);
         }
 
     }
