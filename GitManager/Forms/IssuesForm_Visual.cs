@@ -37,7 +37,7 @@ namespace GitManager.Forms
             this.ExampleRichTextBox.SelectionFont = new Font(this.ExampleRichTextBox.Font, FontStyle.Regular);
             this.ExampleRichTextBox.SelectionStart = this.ExampleRichTextBox.TextLength;
             this.ExampleRichTextBox.SelectionLength = 0;
-            this.ExampleRichTextBox.AppendText("<your security token>");
+            this.ExampleRichTextBox.AppendText("<your generated personal access token>");
             this.ExampleRichTextBox.AppendText(Environment.NewLine);
 
             // Append the Owner text in bold
