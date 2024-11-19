@@ -66,7 +66,7 @@ namespace GitAPI
             }
         }
 
-        static string GetToken()
+        private string GetToken()
         { 
             if (string.IsNullOrWhiteSpace(AppFile.AppFilePath))
             {

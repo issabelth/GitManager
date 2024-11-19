@@ -34,9 +34,27 @@ namespace GitManager.Forms
         private void SetupDataGridView()
         {
             IssuesDataGridView.Columns.Clear();
+            PropertyInfo[] properties = null;
 
-            //var properties = typeof(GitHubIssue).GetProperties(); // github
-            var properties = typeof(GitLabIssue).GetProperties(); // github
+            switch (HostData.Host)
+            {
+                case HostData.HostNameEnum.Github:
+                    {
+                        properties = typeof(GitHubIssue).GetProperties();
+                        break;
+                    }
+                case HostData.HostNameEnum.Gitlab:
+                    {
+                        properties = typeof(GitLabIssue).GetProperties();
+                        break;
+                    }
+            }
+
+            if (properties == null ||
+                properties.Count() <= 0)
+            {
+                return;
+            }
 
             foreach (var property in properties)
             {
@@ -145,38 +163,6 @@ namespace GitManager.Forms
             LoadData();
         }
 
-        private void LoadOptionsButton_Click(object sender, EventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(this.OptionsFilePathTextBox.Text))
-            {
-                MessageBox.Show("Provide options file path!");
-                return;
-            }
-
-            var appOpts = ApiOptions.FromFile(filePath: this.OptionsFilePathTextBox.Text);
-
-            if (appOpts == null)
-            {
-                MessageBox.Show("Could not load your options file. Check the file and try again.");
-                return;
-            }
-            if (string.IsNullOrWhiteSpace(appOpts.Host))
-            {
-                MessageBox.Show("Host is not provided. Correct the file and try again.");
-                return;
-            }
-
-            if (!HostData.HostNameDictionary.Any(x => x.Value == appOpts.Host.ToLower()))
-            {
-                MessageBox.Show("Host is incorrect. Correct the file and try again.");
-                return;
-            }
-
-            HostData.Host = HostData.HostNameDictionary.FirstOrDefault(x => x.Value == appOpts.Host.ToLower()).Key;
-            this.OwnerTextBox.Text = appOpts.Owner;
-            this.RepoTextBox.Text = appOpts.Repo;
-        }
-
         private void SelectFileButton_Click(object sender, EventArgs e)
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
@@ -199,7 +185,19 @@ namespace GitManager.Forms
                     MessageBox.Show("Could not load your options file. Check the file and try again.");
                     return;
                 }
+                if (string.IsNullOrWhiteSpace(appOpts.Host))
+                {
+                    MessageBox.Show("Host is not provided. Correct the file and try again.");
+                    return;
+                }
 
+                if (!HostData.HostNameDictionary.Any(x => x.Value == appOpts.Host.ToLower()))
+                {
+                    MessageBox.Show("Host is incorrect. Correct the file and try again.");
+                    return;
+                }
+
+                HostData.Host = HostData.HostNameDictionary.FirstOrDefault(x => x.Value == appOpts.Host.ToLower()).Key;
                 this.OwnerTextBox.Text = appOpts.Owner;
                 this.RepoTextBox.Text = appOpts.Repo;
             }

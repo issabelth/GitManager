@@ -91,6 +91,7 @@
     <Compile Include="Methods\GetMethods.cs" />
     <Compile Include="GitClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Schemas\BaseIssue.cs" />
     <Compile Include="Schemas\GitLabIssue.cs" />
     <Compile Include="Schemas\GitHubIssue.cs" />
   </ItemGroup>
