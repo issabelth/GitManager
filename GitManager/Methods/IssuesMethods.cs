@@ -9,7 +9,7 @@ namespace GitManager.Methods
     internal static class IssuesMethods
     {
 
-        public static async Task<string> SaveIssue(GitClient client, GitHubIssue issue)
+        public static async Task<string> SaveIssue(GitClient client, BaseIssue issue)
         {
             if (issue.Number.HasValue)
             {
@@ -17,7 +17,7 @@ namespace GitManager.Methods
                     client: client,
                     issueNumber: issue.Number.Value,
                     title: issue.Title,
-                    description: issue.Body,
+                    description: issue.Description,
                     state: issue.State
                     );
             }
@@ -26,7 +26,7 @@ namespace GitManager.Methods
                 return await CreateIssue(
                     client: client,
                     title: issue.Title,
-                    description: issue.Body);
+                    description: issue.Description);
             }
         }
 

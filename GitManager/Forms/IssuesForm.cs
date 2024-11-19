@@ -34,21 +34,7 @@ namespace GitManager.Forms
         private void SetupDataGridView()
         {
             IssuesDataGridView.Columns.Clear();
-            PropertyInfo[] properties = null;
-
-            switch (HostData.Host)
-            {
-                case HostData.HostNameEnum.Github:
-                    {
-                        properties = typeof(GitHubIssue).GetProperties();
-                        break;
-                    }
-                case HostData.HostNameEnum.Gitlab:
-                    {
-                        properties = typeof(GitLabIssue).GetProperties();
-                        break;
-                    }
-            }
+            var properties = typeof(BaseIssue).GetProperties();
 
             if (properties == null ||
                 properties.Count() <= 0)
@@ -131,7 +117,7 @@ namespace GitManager.Forms
             {
                 string issueId = IssuesDataGridView[1, e.RowIndex].Value?.ToString(); // get the number of issue from the row
                 var responseContent = await GetMethods.GetIssue(client: AppClient.Client, issueId: issueId);
-                var issue = JsonConvert.DeserializeObject<GitHubIssue>(responseContent);
+                var issue = JsonConvert.DeserializeObject<BaseIssue>(responseContent);
                 OpenEditIssueForm(issue: issue);
             }
             catch (ResponseException ex)
@@ -144,7 +130,7 @@ namespace GitManager.Forms
             }
         }
 
-        private void OpenEditIssueForm(GitHubIssue issue)
+        private void OpenEditIssueForm(BaseIssue issue)
         {
             try
             {
