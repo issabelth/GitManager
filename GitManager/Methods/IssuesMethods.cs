@@ -112,11 +112,20 @@ namespace GitManager.Methods
             {
                 case HostData.HostNameEnum.Github:
                     {
-                        return await GetMethods.GetIssues(client: client);
+                        return await GetMethods.GetIssues_GiHub(client: client);
                     }
                 case HostData.HostNameEnum.Gitlab:
                     {
-                        return await GetMethods.GetIssues(client: client, addParameters: "?state=opened");
+                        var responseContent = await GetMethods.GetProjectByName_GitLab(client: AppClient.Client, projectName: ApiOptions.ProjectName);
+                        var projects = JsonConvert.DeserializeObject<List<dynamic>>(responseContent);
+                        string projectId = projects.Where(x => x.name == ApiOptions.ProjectName).FirstOrDefault()?.id;
+
+                        if (string.IsNullOrWhiteSpace(projectId))
+                        {
+                            throw new Exception("Could not find your project");
+                        }
+
+                        return await GetMethods.GetIssues_GitLab(client: client, projectId: projectId, addParameters: "?state=opened");
                     }
                 default:
                     {
