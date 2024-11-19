@@ -20,38 +20,28 @@ namespace GitAPI
         {
             { HostNameEnum.Github, "github"},
             { HostNameEnum.Gitlab, "gitlab"},
-            { HostNameEnum.Bitbucket, "gitbucket"},
+            //{ HostNameEnum.Bitbucket, "bitbucket"},
         };
 
-        public static Dictionary<HostNameEnum, string> HostCloseStateNameDictionary = new Dictionary<HostNameEnum, string>()
+        public static HostNameEnum? GetHostKey(string hostName)
         {
-            { HostNameEnum.Github, "close"},
-            { HostNameEnum.Gitlab, "close"},
-        };
-
-        public static string HostName()
-        {
-            var stateName = HostNameDictionary.Where(x => x.Key == Host).FirstOrDefault().Value;
-
-            if (string.IsNullOrWhiteSpace(stateName))
+            if (string.IsNullOrWhiteSpace(hostName))
             {
-                throw new NotImplementedException($"Close state name for {Host} is not implemented.");
+                throw new ArgumentException("Argument 'hostName' has not been provided");
             }
 
-            return stateName;
-        }
+            hostName = hostName.ToLower();
 
-        public static string GetHostCloseName()
-        {
-            var stateName = HostCloseStateNameDictionary.Where(x => x.Key == Host).FirstOrDefault().Value;
-
-            if (string.IsNullOrWhiteSpace(stateName))
+            if (!HostNameDictionary.Any(x => x.Value == hostName))
             {
-                throw new NotImplementedException($"Close state name for {Host} is not implemented.");
+                return null;
             }
 
-            return stateName;
+            var hostKey = HostData.HostNameDictionary.FirstOrDefault(x => x.Value == hostName).Key;
+
+            return hostKey;
         }
+
 
     }
 }

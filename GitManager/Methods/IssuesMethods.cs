@@ -12,23 +12,16 @@ namespace GitManager.Methods
     internal static class IssuesMethods
     {
 
-        public static async Task<string> SaveIssue(GitClient client, BaseIssue issue, bool closeIssue = false)
+        public static async Task<string> SaveIssue(GitClient client, BaseIssue issue)
         {
             if (issue.Number.HasValue)
             {
-                var issueState = issue.State;
-
-                if (closeIssue)
-                {
-                    issueState = HostData.GetHostCloseName();
-                }
-
                 return await UpdateIssue(
                     client: client,
                     issueNumber: issue.Number.Value,
                     title: issue.Title,
                     description: issue.Description,
-                    state: issueState);
+                    state: issue.State);
             }
             else
             {

@@ -89,9 +89,11 @@ namespace GitManager.Forms
                 return;
             }
 
+            this._issue.State = "close";
+
             try
             {
-                await IssuesMethods.SaveIssue(issue: this._issue, client: this.Client, closeIssue: true);
+                await IssuesMethods.SaveIssue(issue: this._issue, client: this.Client);
                 MessageBox.Show($"[{this._issue.Number}] {this._issue.Title} : closed succesfully");
                 this._ParentForm.LoadData();
             }

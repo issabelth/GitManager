@@ -86,13 +86,15 @@ namespace GitManager.Forms
                     return;
                 }
 
-                if (!HostData.HostNameDictionary.Any(x => x.Value == appOpts.Host.ToLower()))
+                var hostKey = HostData.GetHostKey(hostName: appOpts.Host);
+
+                if (!hostKey.HasValue)
                 {
-                    MessageBox.Show("Host is incorrect. Correct the file and try again.");
+                    MessageBox.Show("Host does not exist in the dictionary. Correct the host in file or add a new key in dictionary and try again.");
                     return;
                 }
 
-                HostData.Host = HostData.HostNameDictionary.FirstOrDefault(x => x.Value == appOpts.Host.ToLower()).Key;
+                HostData.Host = hostKey.Value;
                 this.OwnerTextBox.Text = appOpts.Owner;
                 this.RepoTextBox.Text = appOpts.Repo;
                 LoadData();
