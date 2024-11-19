@@ -86,6 +86,7 @@
     <Compile Include="Exceptions\ExceptionMethods.cs" />
     <Compile Include="Exceptions\ResponseException.cs" />
     <Compile Include="HostData.cs" />
+    <Compile Include="Methods\PutMethods.cs" />
     <Compile Include="Methods\PatchMethods.cs" />
     <Compile Include="Methods\PostMethods.cs" />
     <Compile Include="Methods\GetMethods.cs" />

@@ -34,9 +34,27 @@ namespace GitManager.Methods
             }
         }
 
-        private static async Task<string> UpdateIssue(GitClient client, Int64 issueNumber, string title, string description, string state)
+        private static async Task<string> UpdateIssue(GitClient client, int issueNumber, string title, string description, string state)
         {
-            return await PatchMethods.PatchIssue(client: client, issueNumber: issueNumber, title: title, description: description, state: state);
+            switch (HostData.Host)
+            {
+                case HostData.HostNameEnum.Github:
+                    {
+                        return await PatchMethods.PatchIssue(client: client, issueNumber: issueNumber, title: title, description: description, state: state);
+                    }
+                case HostData.HostNameEnum.Gitlab:
+                    {
+                        var responseContent = await GetMethods.GetProjectByName(client: AppClient.Client, projectName: ApiOptions.ProjectName);
+                        var projects = JsonConvert.DeserializeObject<List<dynamic>>(responseContent);
+                        string projectId = projects.Where(x => x.name == ApiOptions.ProjectName).FirstOrDefault()?.id;
+
+                        return await PutMethods.PutIssue_GitLab(client: client, projectId: projectId, issueNumber: issueNumber, title: title, description: description, state: state);
+                    }
+                default:
+                    {
+                        throw new NotImplementedException();
+                    }
+            }
         }
 
         private static async Task<string> CreateIssue(GitClient client, string title, string description)

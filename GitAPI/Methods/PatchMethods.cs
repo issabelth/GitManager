@@ -8,7 +8,7 @@ namespace GitAPI.Methods
     public static class PatchMethods
     {
 
-        public static async Task<string> PatchIssue(GitClient client, Int64 issueNumber, string title, string description, string state)
+        public static async Task<string> PatchIssue(GitClient client, int issueNumber, string title, string description, string state)
         {
             var json = JsonConvert.SerializeObject(new
             {
