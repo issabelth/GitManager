@@ -7,7 +7,6 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
@@ -86,51 +85,6 @@ namespace GitManager.Forms
             }
         }
 
-        private void RefreshButton_Click(object sender, EventArgs e)
-        {
-            LoadData();
-        }
-
-        private void LoadDataButton_Click(object sender, EventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(this.OwnerTextBox.Text) ||
-                string.IsNullOrWhiteSpace(this.RepoTextBox.Text))
-            {
-                MessageBox.Show("Provide Git owner's and repo's names!");
-                return;
-            }
-
-            LoadData();
-        }
-
-        private void createNewIssue_button_Click(object sender, EventArgs e)
-        {
-            OpenEditIssueForm(issueId: null);
-        }
-
-        private void IssuesDataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex < 0 ||
-                e.ColumnIndex < 0)
-            {
-                return;
-            }
-            try
-            {
-                int columnIndex = IssuesDataGridView.Columns[nameof(BaseIssue.Number)].Index;
-                string issueId = IssuesDataGridView[columnIndex, e.RowIndex].Value?.ToString();
-                OpenEditIssueForm(issueId: issueId);
-            }
-            catch (ResponseException ex)
-            {
-                MessageBox.Show(ExceptionMethods.ManageResponseExceptions(ex));
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
         private async void OpenEditIssueForm(string issueId)
         {
             try
@@ -153,48 +107,6 @@ namespace GitManager.Forms
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void SelectFileButton_Click(object sender, EventArgs e)
-        {
-            using (OpenFileDialog openFileDialog = new OpenFileDialog())
-            {
-                openFileDialog.Filter = "Text files (*.txt)|*.txt";
-                openFileDialog.Title = "Select an options file";
-
-                if (openFileDialog.ShowDialog() != DialogResult.OK)
-                {
-                    return;
-                }
-
-                string filePath = openFileDialog.FileName;
-                this.OptionsFilePathTextBox.Text = filePath;
-                
-                var appOpts = ApiOptions.FromFile(filePath: filePath);
-
-                if (appOpts == null)
-                {
-                    MessageBox.Show("Could not load your options file. Check the file and try again.");
-                    return;
-                }
-                if (string.IsNullOrWhiteSpace(appOpts.Host))
-                {
-                    MessageBox.Show("Host is not provided. Correct the file and try again.");
-                    return;
-                }
-
-                if (!HostData.HostNameDictionary.Any(x => x.Value == appOpts.Host.ToLower()))
-                {
-                    MessageBox.Show("Host is incorrect. Correct the file and try again.");
-                    return;
-                }
-
-                HostData.Host = HostData.HostNameDictionary.FirstOrDefault(x => x.Value == appOpts.Host.ToLower()).Key;
-                this.OwnerTextBox.Text = appOpts.Owner;
-                this.RepoTextBox.Text = appOpts.Repo;
-                LoadData();
-                this.LoadDataButton.Enabled = false;
             }
         }
 
@@ -221,56 +133,6 @@ namespace GitManager.Forms
             {
                 this.LoadDataButton.Enabled = false;
             }
-        }
-
-        private void SetExampleTextLookGood()
-        {
-            #region example of the files
-
-            this.ExampleRichTextBox.Clear();
-
-            string hostText = "Host: ";
-            string tokenText = "Token: ";
-            string ownerText = "Owner: ";
-            string repoText = "Repo: ";
-
-            // Append the Host text in bold
-            this.ExampleRichTextBox.SelectionFont = new Font(this.ExampleRichTextBox.Font, FontStyle.Bold);
-            this.ExampleRichTextBox.AppendText(hostText);
-            this.ExampleRichTextBox.SelectionFont = new Font(this.ExampleRichTextBox.Font, FontStyle.Regular);
-            this.ExampleRichTextBox.SelectionStart = this.ExampleRichTextBox.TextLength;
-            this.ExampleRichTextBox.SelectionLength = 0;
-            this.ExampleRichTextBox.AppendText("<one of the following: Github/Gitlab/Bitbucket>");
-            this.ExampleRichTextBox.AppendText(Environment.NewLine);
-
-            // Append the Token text in bold
-            this.ExampleRichTextBox.SelectionFont = new Font(this.ExampleRichTextBox.Font, FontStyle.Bold);
-            this.ExampleRichTextBox.AppendText(tokenText);
-            this.ExampleRichTextBox.SelectionFont = new Font(this.ExampleRichTextBox.Font, FontStyle.Regular);
-            this.ExampleRichTextBox.SelectionStart = this.ExampleRichTextBox.TextLength;
-            this.ExampleRichTextBox.SelectionLength = 0;
-            this.ExampleRichTextBox.AppendText("<your security token>");
-            this.ExampleRichTextBox.AppendText(Environment.NewLine);
-
-            // Append the Owner text in bold
-            this.ExampleRichTextBox.SelectionFont = new Font(this.ExampleRichTextBox.Font, FontStyle.Bold);
-            this.ExampleRichTextBox.AppendText(ownerText);
-            this.ExampleRichTextBox.SelectionFont = new Font(this.ExampleRichTextBox.Font, FontStyle.Regular);
-            this.ExampleRichTextBox.SelectionStart = this.ExampleRichTextBox.TextLength;
-            this.ExampleRichTextBox.SelectionLength = 0;
-            this.ExampleRichTextBox.AppendText("<repository owner's name (needed for GitHub)>");
-            this.ExampleRichTextBox.AppendText(Environment.NewLine);
-
-            // Append the Repo text in bold
-            this.ExampleRichTextBox.SelectionFont = new Font(this.ExampleRichTextBox.Font, FontStyle.Bold);
-            this.ExampleRichTextBox.AppendText(repoText);
-            this.ExampleRichTextBox.SelectionFont = new Font(this.ExampleRichTextBox.Font, FontStyle.Regular);
-            this.ExampleRichTextBox.SelectionStart = this.ExampleRichTextBox.TextLength;
-            this.ExampleRichTextBox.SelectionLength = 0;
-            this.ExampleRichTextBox.AppendText("<repository/project name>");
-            this.ExampleRichTextBox.AppendText(Environment.NewLine);
-
-            #endregion example of the files
         }
 
     }

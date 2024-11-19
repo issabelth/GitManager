@@ -93,6 +93,12 @@
     <Compile Include="Forms\IssuesForm.Designer.cs">
       <DependentUpon>IssuesForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\IssuesForm_ButtonClicks.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\IssuesForm_Visual.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Methods\IssuesMethods.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
