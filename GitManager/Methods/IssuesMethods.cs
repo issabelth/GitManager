@@ -41,7 +41,7 @@ namespace GitManager.Methods
             {
                 case HostData.HostNameEnum.Github:
                     {
-                        return await PostMethods.PostIssue(client: client, title: title, description: description);
+                        return await PostMethods.PostIssue_GitHub(client: client, title: title, description: description);
                     }
                 case HostData.HostNameEnum.Gitlab:
                     {

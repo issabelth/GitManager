@@ -7,37 +7,22 @@ namespace GitAPI.Methods
     public static class PostMethods
     {
         /// <summary>
-        /// Create a new issue
+        /// Create a new issue in GitHub
         /// </summary>
-        public static async Task<string> PostIssue(GitClient client, string title, string description)
+        public static async Task<string> PostIssue_GitHub(GitClient client, string title, string description)
         {
-            string json = string.Empty;
-
-            switch (HostData.Host)
+            string json = JsonConvert.SerializeObject(new
             {
-                case HostData.HostNameEnum.Github:
-                    {
-                        json = JsonConvert.SerializeObject(new
-                        {
-                            title = title,
-                            body = description,
-                        });
-                        break;
-                    }
-                case HostData.HostNameEnum.Gitlab:
-                    {
-                        json = JsonConvert.SerializeObject(new
-                        {
-                            title = title,
-                            description = description,
-                        });
-                        break;
-                    }
-            }
+                title = title,
+                body = description,
+            });
 
             return await client.SendRequest(methodType: HttpMethod.Post, apiPath: $"{client.NewIssueAddress}", json: json);
         }
-        
+
+        /// <summary>
+        /// Create a new issue in GitLab
+        /// </summary>
         public static async Task<string> PostIssue_GitLab(GitClient client, string title, string description, string projectId)
         {
             string json = JsonConvert.SerializeObject(new
