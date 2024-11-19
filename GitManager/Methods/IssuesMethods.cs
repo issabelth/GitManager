@@ -30,12 +30,16 @@ namespace GitManager.Methods
                 return await CreateIssue(
                     client: client,
                     title: issue.Title,
-                    description: issue.Description,
-                    projectName: issue.ProjectName);
+                    description: issue.Description);
             }
         }
 
-        private static async Task<string> CreateIssue(GitClient client, string title, string description, string projectName = "")
+        private static async Task<string> UpdateIssue(GitClient client, Int64 issueNumber, string title, string description, string state)
+        {
+            return await PatchMethods.PatchIssue(client: client, issueNumber: issueNumber, title: title, description: description, state: state);
+        }
+
+        private static async Task<string> CreateIssue(GitClient client, string title, string description)
         {
             switch (HostData.Host)
             {
@@ -45,9 +49,9 @@ namespace GitManager.Methods
                     }
                 case HostData.HostNameEnum.Gitlab:
                     {
-                        var responseContent = await GetMethods.GetProjectByName(client: AppClient.Client, projectName: projectName);
+                        var responseContent = await GetMethods.GetProjectByName(client: AppClient.Client, projectName: ApiOptions.ProjectName);
                         var projects = JsonConvert.DeserializeObject<List<dynamic>>(responseContent);
-                        string projectId = projects.Where(x => x.name == projectName).FirstOrDefault()?.id;
+                        string projectId = projects.Where(x => x.name == ApiOptions.ProjectName).FirstOrDefault()?.id;
 
                         return await PostMethods.PostIssue_GitLab(client: client, title: title, description: description, projectId: projectId);
                     }
@@ -58,9 +62,32 @@ namespace GitManager.Methods
             }
         }
 
-        private static async Task<string> UpdateIssue(GitClient client, Int64 issueNumber, string title, string description, string state)
+        public static async Task<string> GetIssue(GitClient client, string issueId)
         {
-            return await PatchMethods.PatchIssue(client: client, issueNumber: issueNumber, title: title, description: description, state: state);
+            switch (HostData.Host)
+            {
+                case HostData.HostNameEnum.Github:
+                    {
+                        return await GetMethods.GetIssue_GitHub(client: client, issueId: issueId);
+                    }
+                case HostData.HostNameEnum.Gitlab:
+                    {
+                        var responseContent = await GetMethods.GetProjectByName(client: AppClient.Client, projectName: ApiOptions.ProjectName);
+                        var projects = JsonConvert.DeserializeObject<List<dynamic>>(responseContent);
+                        string projectId = projects.Where(x => x.name == ApiOptions.ProjectName).FirstOrDefault()?.id;
+
+                        if (string.IsNullOrWhiteSpace(projectId))
+                        {
+                            throw new Exception("Could not find your project");
+                        }
+
+                        return await GetMethods.GetIssue_GitLab(client: client, issueId: issueId, projectId: projectId);
+                    }
+                default:
+                    {
+                        throw new NotImplementedException();
+                    }
+            }
         }
 
     }

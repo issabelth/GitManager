@@ -2,6 +2,7 @@
 using GitAPI.Exceptions;
 using GitAPI.Methods;
 using GitAPI.Schemas;
+using GitManager.Methods;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -142,7 +143,7 @@ namespace GitManager.Forms
 
                 if (!string.IsNullOrWhiteSpace(issueId))
                 {
-                    var responseContent = await GetMethods.GetIssue(client: AppClient.Client, issueId: issueId);
+                    var responseContent = await IssuesMethods.GetIssue(client: AppClient.Client, issueId: issueId);
                     issue = JsonConvert.DeserializeObject<BaseIssue>(responseContent);
                 }
 
