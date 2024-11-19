@@ -47,7 +47,7 @@ namespace GitManager.Methods
                     {
                         var responseContent = await GetMethods.GetProjectByName(client: AppClient.Client, projectName: projectName);
                         var projects = JsonConvert.DeserializeObject<List<dynamic>>(responseContent);
-                        var projectId = projects.Where(x => x.name == projectName).FirstOrDefault()?.id;
+                        string projectId = projects.Where(x => x.name == projectName).FirstOrDefault()?.id;
 
                         return await PostMethods.PostIssue_GitLab(client: client, title: title, description: description, projectId: projectId);
                     }

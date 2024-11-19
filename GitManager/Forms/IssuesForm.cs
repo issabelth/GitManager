@@ -60,7 +60,7 @@ namespace GitManager.Forms
             }
         }
 
-        private async void LoadData()
+        public async void LoadData()
         {
             try
             {
@@ -141,8 +141,8 @@ namespace GitManager.Forms
         {
             try
             {
-                var createNewIssueForm = new EditIssueForm(client: AppClient.Client, existingIssue: issue);
-                createNewIssueForm.ShowDialog();
+                var createNewIssueForm = new EditIssueForm(client: AppClient.Client, existingIssue: issue, parentForm: this);
+                createNewIssueForm.ShowDialog(this);
             }
             catch (ResponseException ex)
             {
@@ -152,8 +152,6 @@ namespace GitManager.Forms
             {
                 MessageBox.Show(ex.Message);
             }
-            System.Threading.Thread.Sleep(1000); // wait 1 sec
-            LoadData();
         }
 
         private void SelectFileButton_Click(object sender, EventArgs e)

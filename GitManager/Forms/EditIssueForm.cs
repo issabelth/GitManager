@@ -9,13 +9,15 @@ namespace GitManager.Forms
 {
     public partial class EditIssueForm : Form
     {
+        IssuesForm _ParentForm;
         private BaseIssue _issue = null;
         private GitClient Client;
 
-        public EditIssueForm(BaseIssue existingIssue, GitClient client)
+        public EditIssueForm(BaseIssue existingIssue, GitClient client, IssuesForm parentForm)
         {
             InitializeComponent();
             this.Client = client;
+            this._ParentForm = parentForm;
 
             if (existingIssue == null)
             {
@@ -61,6 +63,7 @@ namespace GitManager.Forms
             {
                 await IssuesMethods.SaveIssue(issue: this._issue, client: this.Client);
                 MessageBox.Show($"[{this._issue.Number}] {this._issue.Title} : saved succesfully");
+                this._ParentForm.LoadData();
             }
             catch (ResponseException ex)
             {
@@ -85,6 +88,7 @@ namespace GitManager.Forms
             {
                 await IssuesMethods.SaveIssue(issue: this._issue, client: this.Client);
                 MessageBox.Show($"[{this._issue.Number}] {this._issue.Title} : closed succesfully");
+                this._ParentForm.LoadData();
             }
             catch (ResponseException ex)
             {

@@ -36,6 +36,7 @@
             this.RefreshButton = new System.Windows.Forms.Button();
             this.MiddlePanel = new System.Windows.Forms.Panel();
             this.UpperPanel = new System.Windows.Forms.Panel();
+            this.ExampleRichTextBox = new System.Windows.Forms.RichTextBox();
             this.SelectFileButton = new System.Windows.Forms.Button();
             this.OptionsFilePathTextBox = new System.Windows.Forms.TextBox();
             this.OptionsFilePathLabel = new System.Windows.Forms.Label();
@@ -45,7 +46,6 @@
             this.RepoLabel = new System.Windows.Forms.Label();
             this.OwnerLabel = new System.Windows.Forms.Label();
             this.TipsLabel = new System.Windows.Forms.Label();
-            this.ExampleRichTextBox = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.IssuesDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource)).BeginInit();
             this.BottomPanel.SuspendLayout();
@@ -126,6 +126,15 @@
             this.UpperPanel.Name = "UpperPanel";
             this.UpperPanel.Size = new System.Drawing.Size(1042, 103);
             this.UpperPanel.TabIndex = 4;
+            // 
+            // ExampleRichTextBox
+            // 
+            this.ExampleRichTextBox.Enabled = false;
+            this.ExampleRichTextBox.Location = new System.Drawing.Point(798, 13);
+            this.ExampleRichTextBox.Name = "ExampleRichTextBox";
+            this.ExampleRichTextBox.Size = new System.Drawing.Size(232, 71);
+            this.ExampleRichTextBox.TabIndex = 10;
+            this.ExampleRichTextBox.Text = "";
             // 
             // SelectFileButton
             // 
@@ -209,15 +218,6 @@
             this.TipsLabel.Size = new System.Drawing.Size(169, 13);
             this.TipsLabel.TabIndex = 0;
             this.TipsLabel.Text = "Doubleclick to edit the issue";
-            // 
-            // ExampleRichTextBox
-            // 
-            this.ExampleRichTextBox.Enabled = false;
-            this.ExampleRichTextBox.Location = new System.Drawing.Point(798, 13);
-            this.ExampleRichTextBox.Name = "ExampleRichTextBox";
-            this.ExampleRichTextBox.Size = new System.Drawing.Size(232, 71);
-            this.ExampleRichTextBox.TabIndex = 10;
-            this.ExampleRichTextBox.Text = "";
             // 
             // IssuesForm
             // 
