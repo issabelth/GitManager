@@ -22,7 +22,7 @@ namespace GitAPI.Methods
             return await client.SendRequest(methodType: HttpMethod.Get, apiPath: $"{client.BaseProjectsAddress}/{projectId}/issues/{issueId}");
         }
 
-        public static async Task<string> GetProjectByName(GitClient client, string projectName)
+        public static async Task<string> GetProjectByName_GitLab(GitClient client, string projectName)
         {
             return await client.SendRequest(methodType: HttpMethod.Get, apiPath: $"{client.BaseProjectsAddress}?search={projectName}");
         }

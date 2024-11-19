@@ -12,18 +12,23 @@ namespace GitManager.Methods
     internal static class IssuesMethods
     {
 
-        public static async Task<string> SaveIssue(GitClient client, BaseIssue issue)
+        public static async Task<string> SaveIssue(GitClient client, BaseIssue issue, bool closeIssue = false)
         {
             if (issue.Number.HasValue)
             {
+                var issueState = issue.State;
+
+                if (closeIssue)
+                {
+                    issueState = HostData.GetHostCloseName();
+                }
+
                 return await UpdateIssue(
                     client: client,
                     issueNumber: issue.Number.Value,
                     title: issue.Title,
                     description: issue.Description,
-                    state: issue.State
-                    //projectName: projectName
-                    );
+                    state: issueState);
             }
             else
             {
@@ -44,7 +49,7 @@ namespace GitManager.Methods
                     }
                 case HostData.HostNameEnum.Gitlab:
                     {
-                        var responseContent = await GetMethods.GetProjectByName(client: AppClient.Client, projectName: ApiOptions.ProjectName);
+                        var responseContent = await GetMethods.GetProjectByName_GitLab(client: AppClient.Client, projectName: ApiOptions.ProjectName);
                         var projects = JsonConvert.DeserializeObject<List<dynamic>>(responseContent);
                         string projectId = projects.Where(x => x.name == ApiOptions.ProjectName).FirstOrDefault()?.id;
 
@@ -67,7 +72,7 @@ namespace GitManager.Methods
                     }
                 case HostData.HostNameEnum.Gitlab:
                     {
-                        var responseContent = await GetMethods.GetProjectByName(client: AppClient.Client, projectName: ApiOptions.ProjectName);
+                        var responseContent = await GetMethods.GetProjectByName_GitLab(client: AppClient.Client, projectName: ApiOptions.ProjectName);
                         var projects = JsonConvert.DeserializeObject<List<dynamic>>(responseContent);
                         string projectId = projects.Where(x => x.name == ApiOptions.ProjectName).FirstOrDefault()?.id;
 
@@ -90,7 +95,7 @@ namespace GitManager.Methods
                     }
                 case HostData.HostNameEnum.Gitlab:
                     {
-                        var responseContent = await GetMethods.GetProjectByName(client: AppClient.Client, projectName: ApiOptions.ProjectName);
+                        var responseContent = await GetMethods.GetProjectByName_GitLab(client: AppClient.Client, projectName: ApiOptions.ProjectName);
                         var projects = JsonConvert.DeserializeObject<List<dynamic>>(responseContent);
                         string projectId = projects.Where(x => x.name == ApiOptions.ProjectName).FirstOrDefault()?.id;
 

@@ -13,7 +13,7 @@ namespace GitAPI.Methods
             {
                 title = title,
                 description = description,
-                state = state,
+                state_event = state,
             });
 
             return await client.SendRequest(methodType: HttpMethod.Put, apiPath: $"{client.BaseProjectsAddress}/{projectId}/issues/{issueNumber}", json: json);

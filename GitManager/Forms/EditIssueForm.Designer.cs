@@ -33,7 +33,7 @@
             this.DescriptionLabel = new System.Windows.Forms.Label();
             this.TitleTextBox = new System.Windows.Forms.TextBox();
             this.DescriptionRichTextBox = new System.Windows.Forms.RichTextBox();
-            this.CloseButton = new System.Windows.Forms.Button();
+            this.CloseIssueButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // SaveButton
@@ -81,24 +81,24 @@
             this.DescriptionRichTextBox.TabIndex = 4;
             this.DescriptionRichTextBox.Text = "";
             // 
-            // CloseButton
+            // CloseIssueButton
             // 
-            this.CloseButton.Dock = System.Windows.Forms.DockStyle.Top;
-            this.CloseButton.Enabled = false;
-            this.CloseButton.Location = new System.Drawing.Point(0, 0);
-            this.CloseButton.Name = "CloseButton";
-            this.CloseButton.Size = new System.Drawing.Size(584, 23);
-            this.CloseButton.TabIndex = 5;
-            this.CloseButton.Text = "Close issue";
-            this.CloseButton.UseVisualStyleBackColor = true;
-            this.CloseButton.Click += new System.EventHandler(this.CloseButton_Click);
+            this.CloseIssueButton.Dock = System.Windows.Forms.DockStyle.Top;
+            this.CloseIssueButton.Enabled = false;
+            this.CloseIssueButton.Location = new System.Drawing.Point(0, 0);
+            this.CloseIssueButton.Name = "CloseIssueButton";
+            this.CloseIssueButton.Size = new System.Drawing.Size(584, 23);
+            this.CloseIssueButton.TabIndex = 5;
+            this.CloseIssueButton.Text = "Close issue";
+            this.CloseIssueButton.UseVisualStyleBackColor = true;
+            this.CloseIssueButton.Click += new System.EventHandler(this.CloseIssueButton_Click);
             // 
             // EditIssueForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(584, 450);
-            this.Controls.Add(this.CloseButton);
+            this.Controls.Add(this.CloseIssueButton);
             this.Controls.Add(this.DescriptionRichTextBox);
             this.Controls.Add(this.TitleTextBox);
             this.Controls.Add(this.DescriptionLabel);
@@ -119,6 +119,6 @@
         private System.Windows.Forms.Label DescriptionLabel;
         private System.Windows.Forms.TextBox TitleTextBox;
         private System.Windows.Forms.RichTextBox DescriptionRichTextBox;
-        private System.Windows.Forms.Button CloseButton;
+        private System.Windows.Forms.Button CloseIssueButton;
     }
 }

@@ -29,7 +29,7 @@ namespace GitManager.Forms
                 this._issue = existingIssue;
                 this.TitleTextBox.Text = existingIssue.Title;
                 this.DescriptionRichTextBox.Text = existingIssue.Description;
-                this.CloseButton.Enabled = true;
+                this.CloseIssueButton.Enabled = true;
             }
         }
 
@@ -82,18 +82,16 @@ namespace GitManager.Forms
             }
         }
 
-        private async void CloseButton_Click(object sender, EventArgs e)
+        private async void CloseIssueButton_Click(object sender, EventArgs e)
         {
             if (this._issue == null)
             {
                 return;
             }
 
-            this._issue.State = "closed";
-
             try
             {
-                await IssuesMethods.SaveIssue(issue: this._issue, client: this.Client);
+                await IssuesMethods.SaveIssue(issue: this._issue, client: this.Client, closeIssue: true);
                 MessageBox.Show($"[{this._issue.Number}] {this._issue.Title} : closed succesfully");
                 this._ParentForm.LoadData();
             }
@@ -107,5 +105,6 @@ namespace GitManager.Forms
             }
             this.Close();
         }
+
     }
 }
