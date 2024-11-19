@@ -10,6 +10,11 @@ namespace GitAPI
 
     public class ApiOptions
     {
+        public string Host
+        {
+            get; set;
+        }
+
         public string Token
         {
             get; set;

@@ -9,7 +9,7 @@ namespace GitManager.Methods
     internal static class IssuesMethods
     {
 
-        public static async Task<string> SaveIssue(GitClient client, Issue issue)
+        public static async Task<string> SaveIssue(GitClient client, GitHubIssue issue)
         {
             if (issue.Number.HasValue)
             {

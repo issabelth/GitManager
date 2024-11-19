@@ -85,12 +85,14 @@
     <Compile Include="ApiOptions.cs" />
     <Compile Include="Exceptions\ExceptionMethods.cs" />
     <Compile Include="Exceptions\ResponseException.cs" />
+    <Compile Include="HostData.cs" />
     <Compile Include="Methods\PatchMethods.cs" />
     <Compile Include="Methods\PostMethods.cs" />
     <Compile Include="Methods\GetMethods.cs" />
     <Compile Include="GitClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Schemas\Issue.cs" />
+    <Compile Include="Schemas\GitLabIssue.cs" />
+    <Compile Include="Schemas\GitHubIssue.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

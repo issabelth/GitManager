@@ -9,10 +9,10 @@ namespace GitManager.Forms
 {
     public partial class EditIssueForm : Form
     {
-        private Issue _issue = null;
+        private GitHubIssue _issue = null;
         private GitClient Client;
 
-        public EditIssueForm(Issue existingIssue, GitClient client)
+        public EditIssueForm(GitHubIssue existingIssue, GitClient client)
         {
             InitializeComponent();
             this.Client = client;
@@ -51,7 +51,7 @@ namespace GitManager.Forms
 
             if (this._issue == null)
             {
-                this._issue = new Issue();
+                this._issue = new GitHubIssue();
             }
 
             this._issue.Title = this.TitleTextBox.Text;

@@ -5,6 +5,7 @@ using GitAPI.Schemas;
 using Newtonsoft.Json;
 using System;
 using System.ComponentModel;
+using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 
@@ -21,9 +22,10 @@ namespace GitManager.Forms
             InitializeComponent();
             this.ExampleRichTextBox.Text = 
                 $"Prepare a .txt file with this example:{Environment.NewLine}" +
+                $"Host: <host name (Github/Gitlab/Bitbucket)>{Environment.NewLine}" +
                 $"Token: <your security token>{Environment.NewLine}" +
-                $"Owner: <repository owner's name>{Environment.NewLine}" +
-                $"Repo:  <repository name>{Environment.NewLine}";
+                $"Owner: <repository owner's name (needed for GitHub)>{Environment.NewLine}" +
+                $"Repo:  <repository name (needed for GitHub)>{Environment.NewLine}";
         }
 
         /// <summary>
@@ -33,7 +35,8 @@ namespace GitManager.Forms
         {
             IssuesDataGridView.Columns.Clear();
 
-            var properties = typeof(Issue).GetProperties();
+            //var properties = typeof(GitHubIssue).GetProperties(); // github
+            var properties = typeof(GitLabIssue).GetProperties(); // github
 
             foreach (var property in properties)
             {
@@ -110,7 +113,7 @@ namespace GitManager.Forms
             {
                 string issueId = IssuesDataGridView[1, e.RowIndex].Value?.ToString(); // get the number of issue from the row
                 var responseContent = await GetMethods.GetIssue(client: AppClient.Client, issueId: issueId);
-                var issue = JsonConvert.DeserializeObject<Issue>(responseContent);
+                var issue = JsonConvert.DeserializeObject<GitHubIssue>(responseContent);
                 OpenEditIssueForm(issue: issue);
             }
             catch (ResponseException ex)
@@ -123,7 +126,7 @@ namespace GitManager.Forms
             }
         }
 
-        private void OpenEditIssueForm(Issue issue)
+        private void OpenEditIssueForm(GitHubIssue issue)
         {
             try
             {
@@ -157,7 +160,19 @@ namespace GitManager.Forms
                 MessageBox.Show("Could not load your options file. Check the file and try again.");
                 return;
             }
+            if (string.IsNullOrWhiteSpace(appOpts.Host))
+            {
+                MessageBox.Show("Host is not provided. Correct the file and try again.");
+                return;
+            }
 
+            if (!HostData.HostNameDictionary.Any(x => x.Value == appOpts.Host.ToLower()))
+            {
+                MessageBox.Show("Host is incorrect. Correct the file and try again.");
+                return;
+            }
+
+            HostData.Host = HostData.HostNameDictionary.FirstOrDefault(x => x.Value == appOpts.Host.ToLower()).Key;
             this.OwnerTextBox.Text = appOpts.Owner;
             this.RepoTextBox.Text = appOpts.Repo;
         }

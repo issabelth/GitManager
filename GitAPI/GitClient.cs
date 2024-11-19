@@ -10,26 +10,35 @@ namespace GitAPI
     public class GitClient
     {
 
+        public string BaseClientAddress;
         public string BaseIssuesAddress;
-
-
-        public GitClient(string gitOwnerName, string gitRepoName)
+        
+        public GitClient()
         {
-            this.BaseIssuesAddress = $"repos/{gitOwnerName}/{gitRepoName}/issues";
         }
 
-        public static HttpClient Client = new HttpClient()
+        private HttpRequestMessage GetReadyToRequest(HttpClient httpClient, HttpMethod methodType, string apiPath, string json = "")
         {
-            BaseAddress = new Uri(@"https://api.github.com/"),
-        };
-
-        private static HttpRequestMessage GetReadyToRequest(HttpMethod methodType, string apiPath, string json = "")
-        {
+            httpClient.BaseAddress = new Uri(this.BaseClientAddress);
             var request = new HttpRequestMessage(methodType, apiPath);
-            request.Headers.Add("Accept", "application/vnd.github+json");
-            request.Headers.Add("Authorization", $"Bearer {GetToken()}");
-            request.Headers.Add("X-GitHub-Api-Version", "2022-11-28");
-            request.Headers.Add("User-Agent", "issabelth");
+
+            switch (HostData.Host)
+            {
+                case HostData.HostNameEnum.Github:
+                    {
+                        request.Headers.Add("Accept", "application/vnd.github+json");
+                        request.Headers.Add("Authorization", $"Bearer {GetToken()}");
+                        request.Headers.Add("X-GitHub-Api-Version", "2022-11-28");
+                        request.Headers.Add("User-Agent", "issabelth");
+                        break;
+                    }
+                case HostData.HostNameEnum.Gitlab:
+                    {
+                        request.Headers.Add("Accept", "application/json");
+                        request.Headers.Add("PRIVATE-TOKEN", $"{GetToken()}");
+                        break;
+                    }
+            }
 
             if (!string.IsNullOrWhiteSpace(json))
             {
@@ -41,16 +50,19 @@ namespace GitAPI
 
         public async Task<string> SendRequest(HttpMethod methodType, string apiPath, string json = "")
         {
-            var request = GitClient.GetReadyToRequest(methodType: methodType, apiPath: apiPath, json: json);
-            var response = await GitClient.Client.SendAsync(request);
+            using (var client = new HttpClient())
+            {
+                var request = GetReadyToRequest(httpClient: client, methodType: methodType, apiPath: apiPath, json: json);
+                var response = await client.SendAsync(request);
 
-            if (response.IsSuccessStatusCode)
-            {
-                return response.Content.ReadAsStringAsync().Result;
-            }
-            else
-            {
-                throw new ResponseException(response.StatusCode);
+                if (response.IsSuccessStatusCode)
+                {
+                    return response.Content.ReadAsStringAsync().Result;
+                }
+                else
+                {
+                    throw new ResponseException(response.StatusCode);
+                }
             }
         }
 
