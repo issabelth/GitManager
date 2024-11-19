@@ -79,5 +79,13 @@ namespace GitAPI.Schemas
             }
         }
 
+        public string ProjectName
+        {
+            get
+            {
+                return ApiOptions.ProjectName;
+            }
+        }
+
     }
 }

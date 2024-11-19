@@ -30,6 +30,11 @@ namespace GitAPI
             get; set;
         }
 
+        public static string ProjectName
+        {
+            get; set;
+        }
+
         public static ApiOptions FromFile(string filePath)
         {
             if (!File.Exists(filePath))
@@ -45,6 +50,8 @@ namespace GitAPI
             {
                 options = deserializer.Deserialize<ApiOptions>(reader);
             }
+
+            ApiOptions.ProjectName = options.Repo;
 
             return options;
         }

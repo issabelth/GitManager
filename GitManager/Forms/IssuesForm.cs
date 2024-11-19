@@ -64,6 +64,8 @@ namespace GitManager.Forms
         {
             try
             {
+                ApiOptions.ProjectName = this.RepoTextBox.Text;
+
                 AppClient.CreateClient(
                     ownerName: this.OwnerTextBox.Text,
                     repoName: this.RepoTextBox.Text);

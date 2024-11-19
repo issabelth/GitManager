@@ -1,6 +1,7 @@
 ﻿using GitAPI;
 using GitAPI.Methods;
 using GitAPI.Schemas;
+using Newtonsoft.Json;
 using System;
 using System.Threading.Tasks;
 
@@ -19,6 +20,7 @@ namespace GitManager.Methods
                     title: issue.Title,
                     description: issue.Description,
                     state: issue.State
+                    //projectName: projectName
                     );
             }
             else
@@ -26,12 +28,19 @@ namespace GitManager.Methods
                 return await CreateIssue(
                     client: client,
                     title: issue.Title,
-                    description: issue.Description);
+                    description: issue.Description,
+                    projectName: issue.ProjectName);
             }
         }
 
-        private static async Task<string> CreateIssue(GitClient client, string title, string description)
+        private static async Task<string> CreateIssue(GitClient client, string title, string description, string projectName = "")
         {
+            if (HostData.Host == HostData.HostNameEnum.Gitlab)
+            {
+                var responseContent = await GetMethods.GetProjectByName(client: AppClient.Client, projectName: projectName);
+                var issue = JsonConvert.DeserializeObject<BaseIssue>(responseContent);
+            }
+
             return await PostMethods.PostIssue(client: client, title: title, description: description);
         }
         private static async Task<string> UpdateIssue(GitClient client, Int64 issueNumber, string title, string description, string state)

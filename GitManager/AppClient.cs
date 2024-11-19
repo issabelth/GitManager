@@ -1,5 +1,4 @@
 ﻿using GitAPI;
-using System;
 using static GitAPI.HostData;
 
 namespace GitManager
@@ -28,6 +27,7 @@ namespace GitManager
                         Client.BaseClientAddress = @"https://gitlab.com/api/v4/";
                         Client.BaseIssuesAddress = $"issues";
                         Client.NewIssueAddress = $"projects/64632746/issues";
+                        Client.BaseProjectsAddress = $"projects";
                         break;
                     }
             }
