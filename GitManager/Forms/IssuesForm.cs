@@ -22,12 +22,12 @@ namespace GitManager.Forms
         public IssuesForm()
         {
             InitializeComponent();
+
             this.ExampleRichTextBox.Text = 
-                $"Prepare a .txt file with this example:{Environment.NewLine}" +
-                $"Host: <host name (Github/Gitlab/Bitbucket)>{Environment.NewLine}" +
+                $"<b>Host:</b> <host name (Github/Gitlab/Bitbucket)>{Environment.NewLine}" +
                 $"Token: <your security token>{Environment.NewLine}" +
                 $"Owner: <repository owner's name (needed for GitHub)>{Environment.NewLine}" +
-                $"Repo:  <repository name (needed for GitHub)>{Environment.NewLine}";
+                $"Repo:  <repository/project name>{Environment.NewLine}";
         }
 
         /// <summary>

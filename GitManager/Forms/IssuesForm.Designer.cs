@@ -46,6 +46,7 @@
             this.RepoLabel = new System.Windows.Forms.Label();
             this.OwnerLabel = new System.Windows.Forms.Label();
             this.TipsLabel = new System.Windows.Forms.Label();
+            this.PrepareFileLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.IssuesDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource)).BeginInit();
             this.BottomPanel.SuspendLayout();
@@ -62,7 +63,7 @@
             this.IssuesDataGridView.Location = new System.Drawing.Point(0, 0);
             this.IssuesDataGridView.Name = "IssuesDataGridView";
             this.IssuesDataGridView.ReadOnly = true;
-            this.IssuesDataGridView.Size = new System.Drawing.Size(1042, 698);
+            this.IssuesDataGridView.Size = new System.Drawing.Size(1042, 736);
             this.IssuesDataGridView.TabIndex = 0;
             this.IssuesDataGridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.IssuesDataGridView_CellDoubleClick);
             // 
@@ -72,7 +73,7 @@
             this.CreateNewIssueButton.Enabled = false;
             this.CreateNewIssueButton.Location = new System.Drawing.Point(0, 0);
             this.CreateNewIssueButton.Name = "CreateNewIssueButton";
-            this.CreateNewIssueButton.Size = new System.Drawing.Size(200, 79);
+            this.CreateNewIssueButton.Size = new System.Drawing.Size(200, 41);
             this.CreateNewIssueButton.TabIndex = 1;
             this.CreateNewIssueButton.Text = "Create new issue";
             this.CreateNewIssueButton.UseVisualStyleBackColor = true;
@@ -83,9 +84,9 @@
             this.BottomPanel.Controls.Add(this.RefreshButton);
             this.BottomPanel.Controls.Add(this.CreateNewIssueButton);
             this.BottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.BottomPanel.Location = new System.Drawing.Point(0, 807);
+            this.BottomPanel.Location = new System.Drawing.Point(0, 845);
             this.BottomPanel.Name = "BottomPanel";
-            this.BottomPanel.Size = new System.Drawing.Size(1042, 79);
+            this.BottomPanel.Size = new System.Drawing.Size(1042, 41);
             this.BottomPanel.TabIndex = 2;
             // 
             // RefreshButton
@@ -94,7 +95,7 @@
             this.RefreshButton.Enabled = false;
             this.RefreshButton.Location = new System.Drawing.Point(200, 0);
             this.RefreshButton.Name = "RefreshButton";
-            this.RefreshButton.Size = new System.Drawing.Size(200, 79);
+            this.RefreshButton.Size = new System.Drawing.Size(200, 41);
             this.RefreshButton.TabIndex = 2;
             this.RefreshButton.Text = "Refresh data";
             this.RefreshButton.UseVisualStyleBackColor = true;
@@ -106,11 +107,12 @@
             this.MiddlePanel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.MiddlePanel.Location = new System.Drawing.Point(0, 109);
             this.MiddlePanel.Name = "MiddlePanel";
-            this.MiddlePanel.Size = new System.Drawing.Size(1042, 698);
+            this.MiddlePanel.Size = new System.Drawing.Size(1042, 736);
             this.MiddlePanel.TabIndex = 3;
             // 
             // UpperPanel
             // 
+            this.UpperPanel.Controls.Add(this.PrepareFileLabel);
             this.UpperPanel.Controls.Add(this.ExampleRichTextBox);
             this.UpperPanel.Controls.Add(this.SelectFileButton);
             this.UpperPanel.Controls.Add(this.OptionsFilePathTextBox);
@@ -129,10 +131,11 @@
             // 
             // ExampleRichTextBox
             // 
-            this.ExampleRichTextBox.Enabled = false;
-            this.ExampleRichTextBox.Location = new System.Drawing.Point(798, 13);
+            this.ExampleRichTextBox.Dock = System.Windows.Forms.DockStyle.Right;
+            this.ExampleRichTextBox.Location = new System.Drawing.Point(810, 0);
             this.ExampleRichTextBox.Name = "ExampleRichTextBox";
-            this.ExampleRichTextBox.Size = new System.Drawing.Size(232, 71);
+            this.ExampleRichTextBox.ReadOnly = true;
+            this.ExampleRichTextBox.Size = new System.Drawing.Size(232, 103);
             this.ExampleRichTextBox.TabIndex = 10;
             this.ExampleRichTextBox.Text = "";
             // 
@@ -215,9 +218,19 @@
             this.TipsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.TipsLabel.Location = new System.Drawing.Point(12, 9);
             this.TipsLabel.Name = "TipsLabel";
-            this.TipsLabel.Size = new System.Drawing.Size(169, 13);
+            this.TipsLabel.Size = new System.Drawing.Size(218, 13);
             this.TipsLabel.TabIndex = 0;
-            this.TipsLabel.Text = "Doubleclick to edit the issue";
+            this.TipsLabel.Text = "Doubleclick to edit or close the issue";
+            // 
+            // PrepareFileLabel
+            // 
+            this.PrepareFileLabel.AutoSize = true;
+            this.PrepareFileLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.PrepareFileLabel.Location = new System.Drawing.Point(594, 9);
+            this.PrepareFileLabel.Name = "PrepareFileLabel";
+            this.PrepareFileLabel.Size = new System.Drawing.Size(210, 13);
+            this.PrepareFileLabel.TabIndex = 11;
+            this.PrepareFileLabel.Text = "Prepare a .txt file with this example:";
             // 
             // IssuesForm
             // 
@@ -259,6 +272,7 @@
         private System.Windows.Forms.Label OptionsFilePathLabel;
         private System.Windows.Forms.Button SelectFileButton;
         private System.Windows.Forms.RichTextBox ExampleRichTextBox;
+        private System.Windows.Forms.Label PrepareFileLabel;
     }
 }
 
