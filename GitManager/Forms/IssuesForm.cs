@@ -108,10 +108,10 @@ namespace GitManager.Forms
 
         private void createNewIssue_button_Click(object sender, EventArgs e)
         {
-            OpenEditIssueForm(issue: null);
+            OpenEditIssueForm(issueId: null);
         }
 
-        private async void IssuesDataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void IssuesDataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0 ||
                 e.ColumnIndex < 0)
@@ -122,10 +122,7 @@ namespace GitManager.Forms
             {
                 int columnIndex = IssuesDataGridView.Columns[nameof(BaseIssue.Number)].Index;
                 string issueId = IssuesDataGridView[columnIndex, e.RowIndex].Value?.ToString();
-
-                var responseContent = await GetMethods.GetIssue(client: AppClient.Client, issueId: issueId);
-                var issue = JsonConvert.DeserializeObject<BaseIssue>(responseContent);
-                OpenEditIssueForm(issue: issue);
+                OpenEditIssueForm(issueId: issueId);
             }
             catch (ResponseException ex)
             {
@@ -137,10 +134,18 @@ namespace GitManager.Forms
             }
         }
 
-        private void OpenEditIssueForm(BaseIssue issue)
+        private async void OpenEditIssueForm(string issueId)
         {
             try
             {
+                BaseIssue issue = null;
+
+                if (!string.IsNullOrWhiteSpace(issueId))
+                {
+                    var responseContent = await GetMethods.GetIssue(client: AppClient.Client, issueId: issueId);
+                    issue = JsonConvert.DeserializeObject<BaseIssue>(responseContent);
+                }
+
                 var createNewIssueForm = new EditIssueForm(client: AppClient.Client, existingIssue: issue, parentForm: this);
                 createNewIssueForm.ShowDialog(this);
             }
