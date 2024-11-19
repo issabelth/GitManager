@@ -75,7 +75,7 @@ namespace GitAPI
                 throw new Exception("Problem with the options file. Check your file and try again.");
             }
 
-            var appOpts = ApiOptions.FromFile(AppFile.AppFilePath);
+            var appOpts = ApiOptions.FromFile(filePath: AppFile.AppFilePath, getToken: true);
 
             if (appOpts == null ||
                 string.IsNullOrWhiteSpace(appOpts.Token))

@@ -3,6 +3,8 @@ using GitAPI.Methods;
 using GitAPI.Schemas;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace GitManager.Methods
@@ -35,14 +37,27 @@ namespace GitManager.Methods
 
         private static async Task<string> CreateIssue(GitClient client, string title, string description, string projectName = "")
         {
-            if (HostData.Host == HostData.HostNameEnum.Gitlab)
+            switch (HostData.Host)
             {
-                var responseContent = await GetMethods.GetProjectByName(client: AppClient.Client, projectName: projectName);
-                var issue = JsonConvert.DeserializeObject<BaseIssue>(responseContent);
-            }
+                case HostData.HostNameEnum.Github:
+                    {
+                        return await PostMethods.PostIssue(client: client, title: title, description: description);
+                    }
+                case HostData.HostNameEnum.Gitlab:
+                    {
+                        var responseContent = await GetMethods.GetProjectByName(client: AppClient.Client, projectName: projectName);
+                        var projects = JsonConvert.DeserializeObject<List<dynamic>>(responseContent);
+                        var projectId = projects.Where(x => x.name == projectName).FirstOrDefault()?.id;
 
-            return await PostMethods.PostIssue(client: client, title: title, description: description);
+                        return await PostMethods.PostIssue_GitLab(client: client, title: title, description: description, projectId: projectId);
+                    }
+                default:
+                    {
+                        throw new NotImplementedException();
+                    }
+            }
         }
+
         private static async Task<string> UpdateIssue(GitClient client, Int64 issueNumber, string title, string description, string state)
         {
             return await PatchMethods.PatchIssue(client: client, issueNumber: issueNumber, title: title, description: description, state: state);

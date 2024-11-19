@@ -37,6 +37,17 @@ namespace GitAPI.Methods
 
             return await client.SendRequest(methodType: HttpMethod.Post, apiPath: $"{client.NewIssueAddress}", json: json);
         }
+        
+        public static async Task<string> PostIssue_GitLab(GitClient client, string title, string description, string projectId)
+        {
+            string json = JsonConvert.SerializeObject(new
+                {
+                    title = title,
+                    description = description,
+                });
+
+            return await client.SendRequest(methodType: HttpMethod.Post, apiPath: $"{client.BaseProjectsAddress}/{projectId}/issues", json: json);
+        }
 
     }
 }

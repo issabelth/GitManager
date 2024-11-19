@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Runtime.CompilerServices;
 using YamlDotNet.Serialization;
 
 namespace GitAPI
@@ -35,7 +36,12 @@ namespace GitAPI
             get; set;
         }
 
-        public static ApiOptions FromFile(string filePath)
+        public string GetToken()
+        {
+            return Token;
+        }
+
+        public static ApiOptions FromFile(string filePath, bool getToken = false)
         {
             if (!File.Exists(filePath))
             {
@@ -51,7 +57,10 @@ namespace GitAPI
                 options = deserializer.Deserialize<ApiOptions>(reader);
             }
 
-            ApiOptions.ProjectName = options.Repo;
+            if (!getToken)
+            {
+                ApiOptions.ProjectName = options.Repo;
+            }
 
             return options;
         }
