@@ -4,6 +4,7 @@ using GitAPI.Methods;
 using GitAPI.Schemas;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
@@ -68,7 +69,8 @@ namespace GitManager.Forms
                     repoName: this.RepoTextBox.Text);
 
                 var responseContent = await GetMethods.GetIssues(AppClient.Client);
-                var issues = JsonConvert.DeserializeObject<dynamic>(responseContent);
+                var issues = JsonConvert.DeserializeObject<List<BaseIssue>>(responseContent);
+
                 _bindingSource.DataSource = issues;
                 IssuesDataGridView.DataSource = _bindingSource;
                 SetupDataGridView();
@@ -189,6 +191,8 @@ namespace GitManager.Forms
                 HostData.Host = HostData.HostNameDictionary.FirstOrDefault(x => x.Value == appOpts.Host.ToLower()).Key;
                 this.OwnerTextBox.Text = appOpts.Owner;
                 this.RepoTextBox.Text = appOpts.Repo;
+                LoadData();
+                this.LoadDataButton.Enabled = false;
             }
         }
 

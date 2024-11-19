@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.ComponentModel;
 
 namespace GitAPI.Schemas
 {
@@ -14,6 +13,7 @@ namespace GitAPI.Schemas
 
         [JsonProperty("state")]
         public string State { get; set; }
+
 
         private int? _number;
         [JsonProperty("number")]
@@ -30,6 +30,9 @@ namespace GitAPI.Schemas
         }
 
         private int? _iid;
+        /// <summary>
+        /// GitLab property
+        /// </summary>
         [JsonProperty("iid")]
         public int? Iid
         {
@@ -40,13 +43,15 @@ namespace GitAPI.Schemas
             set
             {
                 _iid = value;
-                _number = value;
+                Number = value;
             }
         }
 
         private string _body;
+        /// <summary>
+        /// GitHub property
+        /// </summary>
         [JsonProperty("body")]
-        [DisplayName("Body")]
         public string Body
         {
             get
@@ -56,7 +61,7 @@ namespace GitAPI.Schemas
             set
             {
                 _body = value;
-                _description = value;
+                Description = value;
             }
         }
 
