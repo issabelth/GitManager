@@ -15,6 +15,7 @@ namespace GitManager.Forms
 {
     public partial class IssuesForm : Form
     {
+        private EditIssueForm _editIssueForm;
         private BindingSource _bindingSource = new BindingSource();
         bool _ownerFilled = false;
         bool _repoFilled = false;
@@ -87,6 +88,13 @@ namespace GitManager.Forms
 
         private async void OpenEditIssueForm(string issueId)
         {
+            if (_editIssueForm != null &&
+                !_editIssueForm.IsDisposed)
+            {
+                _editIssueForm.BringToFront();
+                _editIssueForm.Focus();
+                return;
+            }
             try
             {
                 BaseIssue issue = null;
