@@ -106,5 +106,24 @@ namespace GitManager.Methods
             }
         }
 
+        public static async Task<string> GetIssues(GitClient client)
+        {
+            switch (HostData.Host)
+            {
+                case HostData.HostNameEnum.Github:
+                    {
+                        return await GetMethods.GetIssues(client: client);
+                    }
+                case HostData.HostNameEnum.Gitlab:
+                    {
+                        return await GetMethods.GetIssues(client: client, addParameters: "?state=opened");
+                    }
+                default:
+                    {
+                        throw new NotImplementedException();
+                    }
+            }
+        }
+
     }
 }

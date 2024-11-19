@@ -67,7 +67,7 @@ namespace GitManager.Forms
                     ownerName: this.OwnerTextBox.Text,
                     repoName: this.RepoTextBox.Text);
 
-                var responseContent = await GetMethods.GetIssues(AppClient.Client);
+                var responseContent = await IssuesMethods.GetIssues(AppClient.Client);
                 var issues = JsonConvert.DeserializeObject<List<BaseIssue>>(responseContent);
 
                 _bindingSource.DataSource = issues;

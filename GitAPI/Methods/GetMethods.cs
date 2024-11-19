@@ -7,9 +7,9 @@ namespace GitAPI.Methods
     public static class GetMethods
     {
 
-        public static async Task<string> GetIssues(GitClient client)
+        public static async Task<string> GetIssues(GitClient client, string addParameters = "")
         {
-            return await client.SendRequest(methodType: HttpMethod.Get, apiPath: $"{client.BaseIssuesAddress}");
+            return await client.SendRequest(methodType: HttpMethod.Get, apiPath: $"{client.BaseIssuesAddress}{addParameters}");
         }
 
         public static async Task<string> GetIssue_GitHub(GitClient client, string issueId)
